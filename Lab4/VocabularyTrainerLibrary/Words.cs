@@ -2,7 +2,7 @@
 
 namespace VocabularyTrainerLibrary
 {
-    public class Class1
+    public class Words
     {
     }
 }
