@@ -18,7 +18,7 @@ namespace VocabularyTrainerLibrary
         }
 
         public string[] Translations { get; }
-        
+
         public int FromLanguage { get; }
 
         public int ToLanguage { get; }
