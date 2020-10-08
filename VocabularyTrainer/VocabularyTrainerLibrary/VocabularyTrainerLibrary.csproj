@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Folder.cs" />
     <Compile Include="Word.cs" />
     <Compile Include="WordList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

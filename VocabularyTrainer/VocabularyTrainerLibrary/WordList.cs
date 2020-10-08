@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Linq;
 
 namespace VocabularyTrainerLibrary
 {
-    class WordList
+    public class WordList
     {
         public WordList(string name, params string[] languages)
         {
@@ -16,9 +16,20 @@ namespace VocabularyTrainerLibrary
 
         public string[] Languages { get; }
 
-        public static string[] GetLists() //Returnerar array med namn på alla listor som finns lagrade (utan filändelsen). 
+        public static string[] GetLists()
         {
-            return null;
+            var fileArray = new string[Directory.EnumerateFiles(Folder.FileDirectory).Count()];
+            var i = 0;
+
+            foreach (var file in Directory.EnumerateFiles(Folder.FileDirectory))
+            {
+                fileArray[i] = Path.GetFileNameWithoutExtension(file);
+                i++;
+            }
+
+
+
+            return fileArray;
         }
 
         public static WordList LoadList(string name) //Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
