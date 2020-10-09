@@ -34,6 +34,15 @@ namespace VocabularyTrainerLibrary
 
         public static WordList LoadList(string name) //Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
         {
+            if (File.Exists($"{Folder.FileDirectory}\\{name}.dat"))
+            {
+                using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{name}.dat");
+
+                var languageArray = streamReader.ReadLine().Split(';');
+
+                return new WordList(name, languageArray);
+            }
+
             return null;
         }
 
@@ -44,6 +53,24 @@ namespace VocabularyTrainerLibrary
 
         public void Add(params string[] translations) //Lägger till ord i listan. Kasta ArgumentException om det är fel antal translations. 
         {
+            bool loop = true;
+             
+            while (loop)
+            {
+                for (int i = 0; i < translations.Length; i++)
+                {
+                    Console.WriteLine(i == 0 ? $"Add a new word ({translations[i]}): " : $"Add the {translations[i]} translation: "); 
+                    string input = Console.ReadLine();
+                    if (input != "")
+                    {
+                        //logic to put word in the list
+                    }
+                    else
+                    {
+                        loop = false;
+                    }
+                }
+            }
 
         }
 
@@ -51,9 +78,25 @@ namespace VocabularyTrainerLibrary
         {
             return false;
         }
-        public int Count() //Räknar och returnerar antal ord i listan.
+        public int Count(string listName) //Räknar och returnerar antal ord i listan.
         {
-            return 0;
+            var counter = -1;
+
+            if (File.Exists($"{Folder.FileDirectory}\\{listName}.dat"))
+            {
+                using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{listName}.dat");
+
+                while (streamReader.ReadLine() != null)
+                {
+                    counter++;
+                }
+
+                return counter;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.

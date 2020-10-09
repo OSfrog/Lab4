@@ -18,9 +18,11 @@ namespace VocabularyTrainerLibrary
                 Console.WriteLine("Directory does not exist.");
                 return false;
             }
-
-            FileDirectory = Path.Combine(LocalAppDirectory, "VocabularyTrainer");
-            return true;
+            else
+            {
+                FileDirectory = Path.Combine(LocalAppDirectory, "VocabularyTrainer");
+                return true;
+            }
         }
 
         public static void CreateDirectory()
