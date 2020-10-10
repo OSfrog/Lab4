@@ -10,46 +10,58 @@ namespace VocabularyTrainerConsole
             if (!Folder.AppDirectoryExists())   
                 Folder.CreateDirectory();
 
-            
+            if (args.Length != 0)
+            {
+
+
                 switch (args[0])
                 {
                     case "-lists":
-                    if (args.Length == 1)
-                    {
-                        Console.WriteLine();
-                        foreach (var file in WordList.GetLists())
+                        if (args.Length == 1)
                         {
-                            Console.WriteLine(file);
+                            Console.WriteLine();
+                            foreach (var file in WordList.GetLists())
+                            {
+                                Console.WriteLine(file);
+                            }
+                            Console.WriteLine();
                         }
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        PrintInfo();
-                    }
+                        else
+                        {
+                            PrintInfo();
+                        }
                         break;
 
                     case "-new":
                         if (args.Length > 2)
                         {
-                        Console.WriteLine();
-                        Console.WriteLine("Press Enter (empty line) to stop input of new words.\n");
+                            Console.WriteLine();
+                            Console.WriteLine("Press Enter (empty line) to stop input of new words.\n");
 
-                        //Invoke Add() method.
-                     
+
+                            var languages = new string[args.Length - 2];
+
+                            for (int i = 0; i < args.Length - 2; i++)
+                            {
+                                languages[i] = args[i + 2];
+                            }
+
+                            var wordList = new WordList(args[1], languages);
+
+                            wordList.Add();
 
                         }
-                    else
-                    {
-                        PrintInfo();
-                    }
+                        else
+                        {
+                            PrintInfo();
+                        }
                         break;
 
                     case "-add":
-                    if (args.Length > 1)
-                    {
+                        if (args.Length > 1)
+                        {
 
-                    }
+                        }
                         break;
                     case "-remove":
                         break;
@@ -57,31 +69,31 @@ namespace VocabularyTrainerConsole
                         break;
 
                     case "-count":
-                    if (args.Length == 2 )
-                    {
-                    var wordList = WordList.LoadList(args[1]);
+                        if (args.Length == 2)
+                        {
+                            var wordList = WordList.LoadList(args[1]);
 
-                    var words = wordList.Count(wordList.Name);
-                    
-                    Console.WriteLine($"There are {words} words in list '{wordList.Name}'."); 
-                    }
-                    else
-                    {
-                        PrintInfo();
-                    }
+                            var words = wordList.Count(wordList.Name);
+
+                            Console.WriteLine($"There are {words} words in list '{wordList.Name}'.");
+                        }
+                        else
+                        {
+                            PrintInfo();
+                        }
                         break;
 
                     case "-practice":
                         break;
 
                     default:
-                    //Console.Clear();
-                    PrintInfo();
+                        //Console.Clear();
+                        PrintInfo();
                         break;
                 }
-            
-            
-            
+            }
+
+            PrintInfo();
 
         }
 

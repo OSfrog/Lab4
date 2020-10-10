@@ -18,18 +18,15 @@ namespace VocabularyTrainerLibrary
 
         public static string[] GetLists()
         {
-            var fileArray = new string[Directory.EnumerateFiles(Folder.FileDirectory).Count()];
-            var i = 0;
+            var fileArray = Directory.EnumerateFiles(Folder.FileDirectory).ToArray();
+            var fileNames = new string[fileArray.Count()];
 
-            foreach (var file in Directory.EnumerateFiles(Folder.FileDirectory))
+            for (int i = 0; i < fileNames.Length; i++)
             {
-                fileArray[i] = Path.GetFileNameWithoutExtension(file);
-                i++;
+                fileNames[i] = Path.GetFileNameWithoutExtension(fileArray[i]);
             }
 
-
-
-            return fileArray;
+            return fileNames;
         }
 
         public static WordList LoadList(string name) //Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
@@ -46,29 +43,58 @@ namespace VocabularyTrainerLibrary
             return null;
         }
 
-        public void Save() //Sparar listan till en fil med samma namn som listan och filändelse .dat
+        public void Save(params Word[] word) //Sparar listan till en fil med samma namn som listan och filändelse .dat
         {
+            if (File.Exists($"{Folder.FileDirectory}\\{Name}.dat") && word.Length != 0) //Saves the words
+            {
+                using StreamWriter sWriter = new StreamWriter($"{Folder.FileDirectory}\\{Name}.dat", true);
+                for (int i = 0; i < word[0].Translations.Length; i++)
+                {
+                    sWriter.Write(i == 0 ? $"{Environment.NewLine}{word[0].Translations[i]};" : $"{word[0].Translations[i]};" );
+                }
+            }
+
+            if(!File.Exists($"{Folder.FileDirectory}\\{Name}.dat")) //Saves the languages
+            {
+                using StreamWriter sWriter = File.CreateText($"{Folder.FileDirectory}\\{Name}.dat");
+                for (int i = 0; i < Languages.Length; i++)
+                {
+                    sWriter.Write($"{Languages[i]};");
+                }
+            }
+
+            //Logic for saving the words
+
 
         }
 
         public void Add(params string[] translations) //Lägger till ord i listan. Kasta ArgumentException om det är fel antal translations. 
-        {
+        { //Add argumentexception and refactor the shit out of this!!!!
             bool loop = true;
+            var translatedWords = new string[Languages.Length];
+            
              
             while (loop)
             {
-                for (int i = 0; i < translations.Length; i++)
+                for (int i = 0; i < Languages.Length; i++)
                 {
-                    Console.WriteLine(i == 0 ? $"Add a new word ({translations[i]}): " : $"Add the {translations[i]} translation: "); 
+                    Console.WriteLine(i == 0 ? $"Add a new word ({Languages[i]}): " : $"Add the {Languages[i]} translation: "); 
                     string input = Console.ReadLine();
                     if (input != "")
                     {
-                        //logic to put word in the list
+                        translatedWords[i] = input;
+                        Save();
                     }
                     else
                     {
                         loop = false;
+                        break;
                     }
+                }
+                if (loop)
+                {
+                var word = new Word(translatedWords);
+                Save(word);
                 }
             }
 
