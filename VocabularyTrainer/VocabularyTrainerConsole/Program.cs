@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerConsole
@@ -7,14 +8,14 @@ namespace VocabularyTrainerConsole
     {
         static void Main(string[] args)
         {
-            if (!Folder.AppDirectoryExists())   
+            if (!Folder.AppDirectoryExists())
                 Folder.CreateDirectory();
 
             if (args.Length != 0)
             {
 
 
-                switch (args[0])
+                switch (args[0].ToLower())
                 {
                     case "-lists":
                         if (args.Length == 1)
@@ -35,10 +36,6 @@ namespace VocabularyTrainerConsole
                     case "-new":
                         if (args.Length > 2)
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("Press Enter (empty line) to stop input of new words.\n");
-
-
                             var languages = new string[args.Length - 2];
 
                             for (int i = 0; i < args.Length - 2; i++)
@@ -58,14 +55,33 @@ namespace VocabularyTrainerConsole
                         break;
 
                     case "-add":
-                        if (args.Length > 1)
+                        if (args.Length == 2 && WordList.LoadList(args[1]) != null && !string.IsNullOrWhiteSpace(WordList.LoadList(args[1]).Languages.FirstOrDefault()))
+                        {
+                            var wordList = WordList.LoadList(args[1]);
+                            wordList.Add();
+                        }
+                        else if (args.Length > 2)
+                        {
+                            PrintInfo();
+                        }
+                        else
                         {
 
+                            Console.WriteLine($"\nThe list '{args[1]}' is invalid, use the '-new' command to append languages to the list before adding words.\n");
                         }
                         break;
                     case "-remove":
                         break;
                     case "-words":
+                        if (args.Length == 2 && WordList.LoadList(args[1]) != null)
+                        {
+                            var wordList = WordList.LoadList(args[1]);
+                            wordList.List(1);
+                        }
+                        else
+                        {
+                            PrintInfo();
+                        }
                         break;
 
                     case "-count":
@@ -73,9 +89,18 @@ namespace VocabularyTrainerConsole
                         {
                             var wordList = WordList.LoadList(args[1]);
 
-                            var words = wordList.Count(wordList.Name);
+                            if (wordList != null)
+                            {
+                                var words = wordList.Count(wordList.Name);
 
-                            Console.WriteLine($"There are {words} words in list '{wordList.Name}'.");
+                                Console.WriteLine(words == 1 ? $"There is {words} word in list '{wordList.Name}'." :
+                                    $"There are {words} words in list '{wordList.Name}'.");
+                            }
+                            else
+                            {//Add logic to check if file doesn't exist or if its empty.
+                                Console.WriteLine($"\nThe list '{args[1]}' is empty or does not exist!\n");
+                                break;
+                            }
                         }
                         else
                         {
@@ -92,8 +117,11 @@ namespace VocabularyTrainerConsole
                         break;
                 }
             }
+            else
+            {
+                PrintInfo();
+            }
 
-            PrintInfo();
 
         }
 
