@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerConsole
@@ -76,7 +77,15 @@ namespace VocabularyTrainerConsole
                         if (args.Length == 2 && WordList.LoadList(args[1]) != null)
                         {
                             var wordList = WordList.LoadList(args[1]);
-                            wordList.List(2);
+                            wordList.List(1, x =>
+                            {
+                                foreach (var language in x)
+                                {
+                                    Console.Write(language.PadRight(20));
+                                }
+                                Console.WriteLine();
+                            });
+                            
                         }
                         else
                         {
