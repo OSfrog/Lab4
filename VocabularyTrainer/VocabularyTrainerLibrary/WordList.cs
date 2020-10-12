@@ -34,7 +34,7 @@ namespace VocabularyTrainerLibrary
 
         public static WordList LoadList(string name) //Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
         {
-            
+
             if (File.Exists($"{Folder.FileDirectory}\\{name}.dat"))
             {
                 using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{name}.dat");
@@ -146,19 +146,9 @@ namespace VocabularyTrainerLibrary
         public void List(int sortByTranslation)//, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
         {                                                                         //showTranslations = Callback som anropas för varje ord i listan.
             using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{Name}.dat");
-            for (int i = 0; i < Languages.Length; i++)
-            {
-                //if (userInput == Languages[i])
-                //{
-                //    //sort by languages[i]
-                //    //sortedArray = i.Sort(); där i är namnet på språket och vårt Word objekt
-                //}
-            }
 
-            if (sortByTranslation != 0)
+            if (sortByTranslation == 0)
             {
-                var i = 0;
-                var wordArray = new Word[Count(Name)];
                 var languages = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
                 Console.WriteLine();
                 foreach (var language in languages)
@@ -171,14 +161,56 @@ namespace VocabularyTrainerLibrary
                     Console.WriteLine();
                     var translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
                     var word = new Word(translations);
-                    wordArray[i] = word;
-                    i++;
                     foreach (var translation in word.Translations)
                     {
                         Console.Write(translation.PadRight(10));
                     }
                 }
                 Console.WriteLine("\n");
+
+            }
+            else
+            {
+                var i = 0;
+                var language1 = new string[Count(Name)];
+                var language2 = new string[Count(Name)];
+                var languages = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+                Console.WriteLine();
+                foreach (var language in languages)
+                {
+                    Console.Write(language.ToUpper().PadRight(20));
+                }
+                Console.WriteLine();
+                while (!streamReader.EndOfStream)
+                {
+                    var translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+                    var word = new Word(translations);
+
+
+                    language1[i] = word.Translations[0];
+                    language2[i] = word.Translations[1];
+                    i++;
+                }
+                switch (sortByTranslation)
+                {
+                    case 1:
+                        Array.Sort(language1, language2);
+                        for (int y = 0; y < language1.Length; y++)
+                        {
+                            Console.Write($"{language1[y],-20}{language2[y]}\n");
+                        }
+                        break;
+
+                    case 2:
+                        Array.Sort(language2, language1);
+                        for (int y = 0; y < language1.Length; y++)
+                        {
+                            Console.Write($"{language1[y],-20}{language2[y]}\n");
+                        }
+                        break;
+                    default:
+                        break; 
+                }
 
             }
         }

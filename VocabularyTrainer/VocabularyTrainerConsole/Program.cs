@@ -76,7 +76,7 @@ namespace VocabularyTrainerConsole
                         if (args.Length == 2 && WordList.LoadList(args[1]) != null)
                         {
                             var wordList = WordList.LoadList(args[1]);
-                            wordList.List(1);
+                            wordList.List(2);
                         }
                         else
                         {
