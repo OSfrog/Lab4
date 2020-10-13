@@ -32,5 +32,10 @@ namespace VocabularyTrainerLibrary
             Directory.CreateDirectory(FileDirectory);
             Console.WriteLine($"Creating directory VocabularyTrainer at path: {FileDirectory}");
         }
+
+        public static string GetFilePath(string name)
+        {
+            return $"{FileDirectory}\\{name}.dat";
+        }
     }
 }

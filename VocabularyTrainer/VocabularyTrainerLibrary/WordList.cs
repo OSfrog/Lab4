@@ -118,17 +118,35 @@ namespace VocabularyTrainerLibrary
 
         }
 
-        public bool Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
+        public void Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
         {
-            return false;
+            var filePath = Folder.GetFilePath(Name);
+
+            var languages = new string[Languages.Length];
+            var wordsArray = ReturnWords(out languages);
+
+            var newArray = wordsArray.Where(x => x.Translations.Contains(word)).ToArray();
+
+            using StreamWriter streamWriter = new StreamWriter(filePath);
+            for (int i = 0; i < Languages.Length; i++)
+            {
+                streamWriter.Write($"{languages[i]};");
+            }
+            for (int i = 0; i < newArray.Length; i++)
+            {
+                for (int j = 0; j < newArray[i].Translations.Length; j++)
+                {
+                    streamWriter.Write(j == 0 ? $"{Environment.NewLine}{newArray[i].Translations[j]};" : $"{newArray[i].Translations[j]};");
+                }
+            }
         }
         public int Count(string listName) //Räknar och returnerar antal ord i listan.
         {
             var counter = -1;
 
-            if (File.Exists($"{Folder.FileDirectory}\\{listName}.dat"))
+            if (File.Exists(Folder.GetFilePath(listName)))
             {
-                using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{listName}.dat");
+                using var streamReader = new StreamReader(Folder.GetFilePath(listName));
 
                 while (streamReader.ReadLine() != null)
                 {
@@ -137,42 +155,60 @@ namespace VocabularyTrainerLibrary
 
                 return counter;
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
 
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
         {                                                                         //showTranslations = Callback som anropas för varje ord i listan.
             {
-                using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{Name}.dat");
-                var wordArray = new Word[Count(Name)];
-                var translations = new string[Languages.Length];
-                var languages = streamReader.ReadLine().ToUpper().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+                var languages = new string[Languages.Length];
+
+                var words = ReturnWords(out languages);
+
 
                 showTranslations(languages);
-
-                while (!streamReader.EndOfStream)
-                {
-                    for (int i = 0; i < Languages.Length; i++)
-                    {
-                        translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-                        wordArray[i] = new Word(translations);
-                    }
-                }
+                var sortedList = words.OrderBy(x => x.Translations[sortByTranslation]).ToArray();
 
 
-                var sortedList = wordArray.OrderBy(x => x.Translations[sortByTranslation]).ToArray();
-
-
-                foreach (var word in wordArray)
+                foreach (var word in sortedList)
                 {
                     showTranslations(word.Translations);
                 }
             }
         }
 
+        //public void List(Action<string[]> showTranslations)
+        //{
+        //    var languages = new string[Languages.Length];
+        //    var words = ReturnWords(out languages);
+
+        //    showTranslations(languages);
+
+        //    foreach (var translations in words)
+        //    {
+        //        showTranslations(translations.Translations);
+        //    }
+        //}
+
+        public Word[] ReturnWords(out string[] languagesArray)
+        {
+            using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{Name}.dat");
+            var wordArray = new Word[Count(Name)];
+            var translations = new string[Languages.Length];
+            var languages = streamReader.ReadLine().ToUpper().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+
+            while (!streamReader.EndOfStream)
+            {
+                for (int i = 0; i < Count(Name); i++)
+                {
+                    translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+                    wordArray[i] = new Word(translations);
+                }
+            }
+            languagesArray = languages;
+            return wordArray;
+        }
         public Word GetWordToPractice()  //Returnerar slumpmässigt Word från listan, med slumpmässigt valda 
         {                               // FromLanguage och ToLanguage (dock inte samma). 
 

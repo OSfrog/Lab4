@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CSharp.RuntimeBinder;
+using System;
 using System.Linq;
 using VocabularyTrainerLibrary;
 
@@ -13,9 +14,9 @@ namespace VocabularyTrainerConsole
 
             if (args.Length != 0)
             {
+              
 
-
-                switch (args[0].ToLower())
+                switch (ToLowerArguments(args)[0])
                 {
                     case "-lists":
                         if (args.Length == 1)
@@ -71,6 +72,29 @@ namespace VocabularyTrainerConsole
                         }
                         break;
                     case "-remove":
+                        if (args.Length == 2 && WordList.LoadList(args[1]) != null)
+                        {
+                            var removeInLanguage = 0;
+                            var wordList = WordList.LoadList(args[1]);
+                            for (int i = 0; i < wordList.Languages.Length; i++)
+                            {
+                                if (args[2].ToLower() == wordList.Languages[i].ToLower())
+                                {
+                                    removeInLanguage = i;
+                                }
+                            }
+
+                            for (int i = 3; i < args.Length; i++)
+                            {
+                            wordList.Remove(removeInLanguage, args[i]);
+
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            PrintInfo();
+                        }
                         break;
                     case "-words":
                         if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
@@ -79,9 +103,9 @@ namespace VocabularyTrainerConsole
                             var wordList = WordList.LoadList(args[1]);
                             if (args.Length == 3)
                             {
-                                for (int i = 0; i < args.Length; i++)
+                                for (int i = 0; i < wordList.Languages.Length; i++)
                                 {
-                                    if (args[2] == wordList.Languages[i])
+                                    if (args[2].ToLower() == wordList.Languages[i])
                                     {
                                         sortByLanguage = i;
                                     }
@@ -96,6 +120,26 @@ namespace VocabularyTrainerConsole
                                     Console.WriteLine();
                                 });
 
+                            }
+                            else
+                            {
+                                var languages = new string[wordList.Languages.Length];
+                                var words = wordList.ReturnWords(out languages);
+                                var combinedArray = new string[wordList.Languages.Length + words.Length];
+
+                                foreach (var language in languages)
+                                {
+                                    Console.Write(language.PadRight(20));
+                                }
+                                Console.WriteLine();
+                                foreach (var word in words)
+                                {
+                                    foreach (var translation in word.Translations)
+                                    {
+                                        Console.Write(translation.PadRight(20));
+                                    }
+                                    Console.WriteLine();
+                                }
                             }
                         }
                         else
@@ -158,5 +202,15 @@ namespace VocabularyTrainerConsole
             Console.WriteLine("-practice <listname>\n");
         }
 
+        static string[] ToLowerArguments(string[] args)
+        {
+            var arguments = new string[args.Length];
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                arguments[i] = args[i].ToLower();
+            }
+
+            return arguments;
+        }
     }
 }
