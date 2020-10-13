@@ -145,74 +145,31 @@ namespace VocabularyTrainerLibrary
 
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
         {                                                                         //showTranslations = Callback som anropas för varje ord i listan.
-            using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{Name}.dat");
-
-            if (sortByTranslation == 0)
             {
-                var languages = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-                Console.WriteLine();
-                foreach (var language in languages)
-                {
-                    Console.Write(language.ToUpper().PadRight(10));
-                }
-
-                while (!streamReader.EndOfStream)
-                {
-                    Console.WriteLine();
-                    var translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-                    var word = new Word(translations);
-                    foreach (var translation in word.Translations)
-                    {
-                        Console.Write(translation.PadRight(10));
-                    }
-                }
-                Console.WriteLine("\n");
-
-            }
-            else
-            {
-                var i = 0;
-                var language1 = new string[Count(Name)];
-                var language2 = new string[Count(Name)];
+                using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{Name}.dat");
+                var wordArray = new Word[Count(Name)];
+                var translations = new string[Languages.Length];
                 var languages = streamReader.ReadLine().ToUpper().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-                Console.WriteLine();
-                //foreach (var language in languages)
-                //{
-                //    Console.Write(language.ToUpper().PadRight(20));
-                //}
+
                 showTranslations(languages);
 
-                Console.WriteLine();
                 while (!streamReader.EndOfStream)
                 {
-                    var translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-                    var word = new Word(translations);
-
-                    language1[i] = word.Translations[0];
-                    language2[i] = word.Translations[1];
-                    i++;
+                    for (int i = 0; i < Languages.Length; i++)
+                    {
+                        translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+                        wordArray[i] = new Word(translations);
+                    }
                 }
-                switch (sortByTranslation)
+
+
+                var sortedList = wordArray.OrderBy(x => x.Translations[sortByTranslation]).ToArray();
+
+
+                foreach (var word in wordArray)
                 {
-                    case 1:
-                        Array.Sort(language1, language2);
-                        for (int y = 0; y < language1.Length; y++)
-                        {
-                            Console.Write($"{language1[y],-20}{language2[y]}\n");
-                        }
-                        break;
-
-                    case 2:
-                        Array.Sort(language2, language1);
-                        for (int y = 0; y < language1.Length; y++)
-                        {
-                            Console.Write($"{language1[y],-20}{language2[y]}\n");
-                        }
-                        break;
-                    default:
-                        break; 
+                    showTranslations(word.Translations);
                 }
-
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerConsole
@@ -74,18 +73,30 @@ namespace VocabularyTrainerConsole
                     case "-remove":
                         break;
                     case "-words":
-                        if (args.Length == 2 && WordList.LoadList(args[1]) != null)
+                        if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
                         {
+                            var sortByLanguage = 0;
                             var wordList = WordList.LoadList(args[1]);
-                            wordList.List(1, x =>
+                            if (args.Length == 3)
                             {
-                                foreach (var language in x)
+                                for (int i = 0; i < args.Length; i++)
                                 {
-                                    Console.Write(language.PadRight(20));
+                                    if (args[2] == wordList.Languages[i])
+                                    {
+                                        sortByLanguage = i;
+                                    }
                                 }
-                                Console.WriteLine();
-                            });
-                            
+
+                                wordList.List(sortByLanguage, x =>
+                                {
+                                    foreach (var words in x)
+                                    {
+                                        Console.Write(words.PadRight(20));
+                                    }
+                                    Console.WriteLine();
+                                });
+
+                            }
                         }
                         else
                         {
