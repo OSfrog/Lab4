@@ -1,5 +1,4 @@
-﻿using Microsoft.CSharp.RuntimeBinder;
-using System;
+﻿using System;
 using System.Linq;
 using VocabularyTrainerLibrary;
 
@@ -9,12 +8,11 @@ namespace VocabularyTrainerConsole
     {
         static void Main(string[] args)
         {
-            if (!Folder.AppDirectoryExists())
-                Folder.CreateDirectory();
+
 
             if (args.Length != 0)
             {
-              
+
 
                 switch (ToLowerArguments(args)[0])
                 {
@@ -22,11 +20,14 @@ namespace VocabularyTrainerConsole
                         if (args.Length == 1)
                         {
                             Console.WriteLine();
-                            foreach (var file in WordList.GetLists())
+                            if (WordList.GetLists() != null)
                             {
-                                Console.WriteLine(file);
+                                foreach (var file in WordList.GetLists())
+                                {
+                                    Console.WriteLine(file);
+                                }
+                                Console.WriteLine();
                             }
-                            Console.WriteLine();
                         }
                         else
                         {
@@ -45,9 +46,32 @@ namespace VocabularyTrainerConsole
                             }
 
                             var wordList = new WordList(args[1], languages);
+                            var input = "init";
+                            var words = new string[wordList.Languages.Length];
 
-                            wordList.Add();
+                            Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
+                            while (input != "")
+                            {
+                                for (int i = 0; i < wordList.Languages.Length; i++)
+                                {
+                                    Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
+                                    input = Console.ReadLine();
+                                    if (input != "")
+                                    {
+                                        words[i] = input;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
 
+                                if (input != "")
+                                {
+                                    wordList.Add(words);
+                                    wordList.Save();
+                                }
+                            }
                         }
                         else
                         {
@@ -56,10 +80,34 @@ namespace VocabularyTrainerConsole
                         break;
 
                     case "-add":
-                        if (args.Length == 2 && WordList.LoadList(args[1]) != null && !string.IsNullOrWhiteSpace(WordList.LoadList(args[1]).Languages.FirstOrDefault()))
+                        if (args.Length == 2 && WordList.LoadList(args[1]) != null)
                         {
+                            var input = "init";
                             var wordList = WordList.LoadList(args[1]);
-                            wordList.Add();
+                            var words = new string[wordList.Languages.Length];
+
+                            Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
+                            while (input != "")
+                            {
+                                for (int i = 0; i < wordList.Languages.Length; i++)
+                                {
+                                    Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
+                                    input = Console.ReadLine();
+                                    if (input != "")
+                                    {
+                                        words[i] = input;
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (input != "")
+                                {
+                                wordList.Add(words);
+                                wordList.Save();
+                                }
+                            }
                         }
                         else if (args.Length > 2)
                         {
@@ -86,7 +134,7 @@ namespace VocabularyTrainerConsole
 
                             for (int i = 3; i < args.Length; i++)
                             {
-                            wordList.Remove(removeInLanguage, args[i]);
+                                wordList.Remove(removeInLanguage, args[i]);
 
                             }
                             break;
@@ -123,16 +171,12 @@ namespace VocabularyTrainerConsole
                             }
                             else
                             {
-                                var languages = new string[wordList.Languages.Length];
-                                var words = wordList.ReturnWords(out languages);
-                                var combinedArray = new string[wordList.Languages.Length + words.Length];
-
-                                foreach (var language in languages)
+                                foreach (var language in wordList.Languages)
                                 {
-                                    Console.Write(language.PadRight(20));
+                                    Console.Write(language.ToUpper().PadRight(20));
                                 }
                                 Console.WriteLine();
-                                foreach (var word in words)
+                                foreach (var word in wordList.ReturnWords())
                                 {
                                     foreach (var translation in word.Translations)
                                     {
@@ -141,6 +185,10 @@ namespace VocabularyTrainerConsole
                                     Console.WriteLine();
                                 }
                             }
+                        }
+                        else if (args.Length == 2 && WordList.LoadList(args[1]) == null)
+                        {
+                            Console.WriteLine($"\n-list '{args[1]}' is empty or does not exist\n");
                         }
                         else
                         {

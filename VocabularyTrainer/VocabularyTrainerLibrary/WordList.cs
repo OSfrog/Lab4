@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace VocabularyTrainerLibrary
 {
     public class WordList   //Endast private metoder som inte finns med i PDFen.
     {
         private static readonly char[] charSeparator = new char[] { ';' };
-        
-        private List<Word> Words = new List<Word>(); //Implementera i Save och Add.
+
+        private List<Word> words = new List<Word>(); //Implementera i Save och Add.
 
         public WordList(string name, params string[] languages)
         {
@@ -26,113 +25,114 @@ namespace VocabularyTrainerLibrary
 
         public static string[] GetLists()
         {
-            var fileArray = Directory.EnumerateFiles(Folder.FileDirectory).ToArray();
-            var fileNames = new string[fileArray.Count()];
-
-            for (int i = 0; i < fileNames.Length; i++)
+            if (Folder.AppDirectoryExists())
             {
-                fileNames[i] = Path.GetFileNameWithoutExtension(fileArray[i]);
-            }
 
-            return fileNames;
+                var fileArray = Directory.EnumerateFiles(Folder.FileDirectory).ToArray();
+                var fileNames = new string[fileArray.Count()];
+
+                for (int i = 0; i < fileNames.Length; i++)
+                {
+                    fileNames[i] = Path.GetFileNameWithoutExtension(fileArray[i]);
+                }
+
+                return fileNames;
+            }
+            else
+            {
+                Folder.CreateDirectory();
+                return null;
+            }
         }
 
         public static WordList LoadList(string name) //Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
         {
 
-            if (File.Exists($"{Folder.FileDirectory}\\{name}.dat"))
+            if (File.Exists(Folder.GetFilePath(name)) && new FileInfo(Folder.GetFilePath(name)).Length != 0)
             {
-                using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{name}.dat");
+                using var streamReader = new StreamReader(Folder.GetFilePath(name));
 
-                if (!streamReader.EndOfStream)
+                var languageArray = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+
+                var wordList = new WordList(name, languageArray);
+
+                while (!streamReader.EndOfStream)
                 {
-                    var languageArray = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+                    wordList.Add(streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries));
+                }
 
-                    return new WordList(name, languageArray);
+                if (languageArray.Length != 0 && wordList.words.Count != 0)
+                {
+                    return wordList;
+                }
+                else
+                {
+                    return null;
                 }
             }
-
+            else
+            {
+                if (!Folder.AppDirectoryExists())
+                    Folder.CreateDirectory();
+            }
             return null;
         }
 
-        public void Save(params Word[] word) //Sparar listan till en fil med samma namn som listan och filändelse .dat
+        public void Save() //Sparar listan till en fil med samma namn som listan och filändelse .dat
         {
-            var filePath = Path.Combine(Folder.FileDirectory, Name + ".dat");
 
-            if (!File.Exists(filePath)) //Creates the file and saves the languages
+            if (!Folder.AppDirectoryExists())
             {
-                using StreamWriter streamWriter = File.CreateText(filePath);
-                for (int i = 0; i < Languages.Length; i++)
+                Folder.CreateDirectory();
+            }
+            var filePath = Folder.GetFilePath(Name);
+
+            using var streamWriter = new StreamWriter(filePath, false);
+
+            for (int i = 0; i < Languages.Length; i++)
+            {
+                streamWriter.Write($"{Languages[i]};");
+            }
+            foreach (var wordArray in words)
+            {
+                for (int i = 0; i < wordArray.Translations.Length; i++)
                 {
-                    streamWriter.Write($"{Languages[i]};");
+                    streamWriter.Write( i % Languages.Length == 0 ? $"{wordArray.Translations[i]};" : $"{wordArray.Translations[i]};{Environment.NewLine}");
                 }
             }
 
-            else if (File.Exists(filePath) && word.Length == 0 && new FileInfo(filePath).Length == 0) //If file exists and is empty; save the languages. 
-            {
-                using StreamWriter streamWriter = File.CreateText(filePath);
-
-                for (int i = 0; i < Languages.Length; i++)
-                {
-                    streamWriter.Write($"{Languages[i]};");
-                }
-            }
-
-            else if (File.Exists(filePath) && word.Length != 0) //Saves the words
-            {
-                using StreamWriter streamWriter = new StreamWriter(filePath, true);
-                for (int i = 0; i < word[0].Translations.Length; i++)
-                {
-                    streamWriter.Write(i == 0 ? $"{Environment.NewLine}{word[0].Translations[i]};" : $"{word[0].Translations[i]};");
-                }
-            }
         }
 
         public void Add(params string[] translations) //Lägger till ord i listan. Kasta ArgumentException om det är fel antal translations. 
         { //Add argumentexception and refactor the shit out of this!!!!
-            bool loop = true;
-            var translatedWords = new string[Languages.Length];
-
-            Console.WriteLine();
-            Console.WriteLine("Press Enter (empty line) to stop input of new words.\n");
-            Save();
-
-            while (loop)
+            if (translations.Length % Languages.Length == 0)
             {
-                for (int i = 0; i < Languages.Length; i++)
-                {
-                    Console.Write(i == 0 ? $"Add a new word ({Languages[i]}): " : $"Add the {Languages[i]} translation: ");
-                    string input = Console.ReadLine();
-                    if (input != "")
-                    {
-                        translatedWords[i] = input;
-                    }
-                    else
-                    {
-                        loop = false;
-                        break;
-                    }
-                }
-
-                if (loop)
-                {
-                    var word = new Word(translatedWords);
-                    Save(word);
-                }
+                words.Add(new Word(translations));
             }
-
+            else
+            {
+                throw new ArgumentException();
+            }
         }
 
         public void Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
         {
-            var filePath = Folder.GetFilePath(Name);
-
             var languages = new string[Languages.Length];
-            var wordsArray = ReturnWords(out languages);
 
-            var newArray = wordsArray.Where(x => x.Translations.Contains(word)).ToArray();
+            using var streamReader = new StreamReader(Folder.GetFilePath(Name));
 
-            using StreamWriter streamWriter = new StreamWriter(filePath);
+            languages = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
+
+            while (!streamReader.EndOfStream)
+            {
+                words.Add(new Word(streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries)));
+            }
+
+            streamReader.Close();
+
+            var newArray = words.Where(x => x.Translations[translation] != word).ToArray();
+
+            using StreamWriter streamWriter = new StreamWriter(Folder.GetFilePath(Name));
             for (int i = 0; i < Languages.Length; i++)
             {
                 streamWriter.Write($"{languages[i]};");
@@ -169,7 +169,7 @@ namespace VocabularyTrainerLibrary
             {
                 var languages = new string[Languages.Length];
 
-                var words = ReturnWords(out languages);
+                var words = ReturnWords();
 
 
                 showTranslations(languages);
@@ -184,24 +184,11 @@ namespace VocabularyTrainerLibrary
         }
 
 
-        public Word[] ReturnWords(out string[] languagesArray)
+        public List<Word> ReturnWords()
         {
-            using var streamReader = new StreamReader($"{Folder.FileDirectory}\\{Name}.dat");
-            var wordArray = new Word[Count(Name)];
-            var translations = new string[Languages.Length];
-            var languages = streamReader.ReadLine().ToUpper().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-
-            while (!streamReader.EndOfStream)
-            {
-                for (int i = 0; i < Count(Name); i++)
-                {
-                    translations = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-                    wordArray[i] = new Word(translations);
-                }
-            }
-            languagesArray = languages;
-            return wordArray;
-        } //Gör denna private.
+            var list = LoadList(Name);
+            return list.words;
+        }
         public Word GetWordToPractice()  //Returnerar slumpmässigt Word från listan, med slumpmässigt valda 
         {                               // FromLanguage och ToLanguage (dock inte samma). 
 

@@ -3,34 +3,28 @@ using System.IO;
 
 namespace VocabularyTrainerLibrary
 {
-    public static class Folder //Gör denna privat
+    internal static class Folder 
     {
-
-        public static string FileDirectory { get; private set; }
-        public static string LocalAppDirectory { get; private set; }
+        public static string FileDirectory  => Path.Combine(LocalAppDirectory, "VocabularyTrainer");
+        public static string LocalAppDirectory  => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
         public static bool AppDirectoryExists()
         {
-            LocalAppDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
             if (!Directory.Exists(LocalAppDirectory + "\\vocabularytrainer"))
             {
-                Console.WriteLine("Directory does not exist.");
+                Console.WriteLine("-directory does not exist.");
                 return false;
             }
             else
             {
-                FileDirectory = Path.Combine(LocalAppDirectory, "VocabularyTrainer");
                 return true;
             }
         }
 
         public static void CreateDirectory()
         {
-            FileDirectory = Path.Combine(LocalAppDirectory, "VocabularyTrainer");
-
             Directory.CreateDirectory(FileDirectory);
-            Console.WriteLine($"Creating directory VocabularyTrainer at path: {FileDirectory}");
+            Console.WriteLine($"-creating directory VocabularyTrainer at path: {FileDirectory}\n");
         }
 
         public static string GetFilePath(string name)
