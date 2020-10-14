@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerConsole
@@ -82,6 +81,7 @@ namespace VocabularyTrainerConsole
                     case "-add":
                         if (args.Length == 2 && WordList.LoadList(args[1]) != null)
                         {
+                            var count = 0;
                             var input = "init";
                             var wordList = WordList.LoadList(args[1]);
                             var words = new string[wordList.Languages.Length];
@@ -104,10 +104,13 @@ namespace VocabularyTrainerConsole
                                 }
                                 if (input != "")
                                 {
-                                wordList.Add(words);
-                                wordList.Save();
+                                    wordList.Add(words);
+                                    wordList.Save();
+                                    count++;
                                 }
                             }
+
+                            Console.WriteLine(count == 1 ? $"\n-added {count} word to list '{wordList.Name}'\n" : $"\n-added {count} words to list '{wordList.Name}'\n");
                         }
                         else if (args.Length > 2)
                         {
@@ -116,7 +119,7 @@ namespace VocabularyTrainerConsole
                         else
                         {
 
-                            Console.WriteLine($"\nThe list '{args[1]}' is invalid, use the '-new' command to append languages to the list before adding words.\n");
+                            Console.WriteLine($"\n-list '{args[1]}' is invalid, use the '-new' command to append languages to the list before adding words\n");
                         }
                         break;
                     case "-remove":
@@ -201,16 +204,17 @@ namespace VocabularyTrainerConsole
                         {
                             var wordList = WordList.LoadList(args[1]);
 
-                            if (wordList != null)
+                            if (wordList != null && wordList.Count(args[1]) != 0)
                             {
-                                var words = wordList.Count(wordList.Name);
+                                var words = wordList.Count(args[1]);
 
-                                Console.WriteLine(words == 1 ? $"There is {words} word in list '{wordList.Name}'." :
-                                    $"There are {words} words in list '{wordList.Name}'.");
+                                Console.WriteLine(words == 1 ? $"\n-there is {words} word in list '{wordList.Name}'\n" :
+                                    $"\n-there are {words} words in list '{wordList.Name}'\n");
                             }
                             else
-                            {//Add logic to check if file doesn't exist or if its empty.
-                                Console.WriteLine($"\nThe list '{args[1]}' is empty or does not exist!\n");
+                            { 
+                                Console.WriteLine(wordList.Languages.Length != 0 ? $"\n-the list '{args[1]}' is empty\n" :
+                                    $"\n-the list '{args[1]}' does not exist\n");
                                 break;
                             }
                         }

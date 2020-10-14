@@ -61,7 +61,7 @@ namespace VocabularyTrainerLibrary
                     wordList.Add(streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries));
                 }
 
-                if (languageArray.Length != 0 && wordList.words.Count != 0)
+                if (languageArray.Length != 0)
                 {
                     return wordList;
                 }
@@ -91,13 +91,13 @@ namespace VocabularyTrainerLibrary
 
             for (int i = 0; i < Languages.Length; i++)
             {
-                streamWriter.Write($"{Languages[i]};");
+                streamWriter.Write(i != Languages.Length - 1 ? $"{Languages[i]};" : $"{Languages[i]};{Environment.NewLine}");
             }
             foreach (var wordArray in words)
             {
                 for (int i = 0; i < wordArray.Translations.Length; i++)
                 {
-                    streamWriter.Write( i % Languages.Length == 0 ? $"{wordArray.Translations[i]};" : $"{wordArray.Translations[i]};{Environment.NewLine}");
+                    streamWriter.Write( i != Languages.Length - 1 ? $"{wordArray.Translations[i]};" : $"{wordArray.Translations[i]};{Environment.NewLine}");
                 }
             }
 
@@ -147,18 +147,10 @@ namespace VocabularyTrainerLibrary
         }
         public int Count(string listName) //Räknar och returnerar antal ord i listan.
         {
-            var counter = -1;
-
             if (File.Exists(Folder.GetFilePath(listName)))
             {
-                using var streamReader = new StreamReader(Folder.GetFilePath(listName));
-
-                while (streamReader.ReadLine() != null)
-                {
-                    counter++;
-                }
-
-                return counter;
+                var list = LoadList(listName);
+                return list.words.Count();
             }
 
             return 0;
@@ -167,14 +159,10 @@ namespace VocabularyTrainerLibrary
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
         {                                                                         //showTranslations = Callback som anropas för varje ord i listan.
             {
-                var languages = new string[Languages.Length];
-
                 var words = ReturnWords();
 
-
-                showTranslations(languages);
+                showTranslations(Languages);
                 var sortedList = words.OrderBy(x => x.Translations[sortByTranslation]).ToArray();
-
 
                 foreach (var word in sortedList)
                 {
