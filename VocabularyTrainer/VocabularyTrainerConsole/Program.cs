@@ -72,7 +72,7 @@ namespace VocabularyTrainerConsole
                         }
                         break;
                     case "-remove":
-                        if (args.Length == 2 && WordList.LoadList(args[1]) != null)
+                        if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
                         {
                             var removeInLanguage = 0;
                             var wordList = WordList.LoadList(args[1]);

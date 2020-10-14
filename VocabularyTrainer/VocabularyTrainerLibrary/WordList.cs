@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace VocabularyTrainerLibrary
 {
-    public class WordList
+    public class WordList   //Endast private metoder som inte finns med i PDFen.
     {
         private static readonly char[] charSeparator = new char[] { ';' };
+        
+        private List<Word> Words = new List<Word>(); //Implementera i Save och Add.
 
         public WordList(string name, params string[] languages)
         {
@@ -17,6 +21,7 @@ namespace VocabularyTrainerLibrary
         public string Name { get; }
 
         public string[] Languages { get; }
+
 
 
         public static string[] GetLists()
@@ -178,18 +183,6 @@ namespace VocabularyTrainerLibrary
             }
         }
 
-        //public void List(Action<string[]> showTranslations)
-        //{
-        //    var languages = new string[Languages.Length];
-        //    var words = ReturnWords(out languages);
-
-        //    showTranslations(languages);
-
-        //    foreach (var translations in words)
-        //    {
-        //        showTranslations(translations.Translations);
-        //    }
-        //}
 
         public Word[] ReturnWords(out string[] languagesArray)
         {
@@ -208,7 +201,7 @@ namespace VocabularyTrainerLibrary
             }
             languagesArray = languages;
             return wordArray;
-        }
+        } //Gör denna private.
         public Word GetWordToPractice()  //Returnerar slumpmässigt Word från listan, med slumpmässigt valda 
         {                               // FromLanguage och ToLanguage (dock inte samma). 
 

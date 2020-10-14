@@ -3,7 +3,7 @@ using System.IO;
 
 namespace VocabularyTrainerLibrary
 {
-    public static class Folder
+    public static class Folder //Gör denna privat
     {
 
         public static string FileDirectory { get; private set; }
