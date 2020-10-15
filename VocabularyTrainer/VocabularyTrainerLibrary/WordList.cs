@@ -98,13 +98,13 @@ namespace VocabularyTrainerLibrary
 
         public void Add(params string[] translations) //Lägger till ord i listan. Kasta ArgumentException om det är fel antal translations. 
         { //Add argumentexception and refactor the shit out of this!!!!
-            if (translations.Length == Languages.Length)
+            if (translations.Length == Languages.Length && !translations.Any(x => string.IsNullOrWhiteSpace(x)))
             {
                 words.Add(new Word(translations));
             }
             else
             {
-                throw new ArgumentException();
+                throw new InvalidOperationException("\n-invalid amounts of translations\n");
             }
         }
 
