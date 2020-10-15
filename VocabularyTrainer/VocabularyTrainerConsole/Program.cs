@@ -8,12 +8,8 @@ namespace VocabularyTrainerConsole
     {
         static void Main(string[] args)
         {
-
-
             if (args.Length != 0)
             {
-
-
                 switch (ToLowerArguments(args)[0])
                 {
                     case "-lists":
@@ -52,8 +48,6 @@ namespace VocabularyTrainerConsole
             {
                 PrintInfo();
             }
-
-
         }
 
 
@@ -119,6 +113,7 @@ namespace VocabularyTrainerConsole
                         wordList.Save();
                     }
                 }
+                Console.WriteLine($"-created list '{wordList.Name}' and added {wordList.Count(wordList.Name)} words");
             }
             else
             {
@@ -289,8 +284,8 @@ namespace VocabularyTrainerConsole
 
         static void Practice(string[] args)
         {
-            var correctCounter = 0;
-            var wordCounter = 0;
+            var correctCounter = 0f;
+            var wordCounter = 0f;
             var wordList = WordList.LoadList(args[1]);
             Console.WriteLine("\n-press Enter (empty line) to stop practicing\n");
 
@@ -328,8 +323,9 @@ namespace VocabularyTrainerConsole
             }
 
             Console.WriteLine($"-{wordCounter} words were practiced on");
-            Console.WriteLine(correctCounter != 0 ? $"-{100 / correctCounter:N0}% of answers were correct" 
+            Console.WriteLine(correctCounter != 0 ? $"-{correctCounter/wordCounter:0%} of answers were correct" 
                 : $"-no answers were correct");
+            Console.ReadKey();
         }
         static void PrintInfo()
         {
@@ -344,6 +340,10 @@ namespace VocabularyTrainerConsole
             Console.WriteLine("-practice <listname>\n");
         }
 
+        static void AddWords(WordList wordlist)
+        {
+
+        }
         static string[] ToLowerArguments(string[] args)
         {
             var arguments = new string[args.Length];
@@ -355,12 +355,12 @@ namespace VocabularyTrainerConsole
             return arguments;
         }
 
-        public static void ClearCurrentConsoleLine()
+        static void ClearCurrentConsoleLine()
         {
             int currentLineCursor = Console.CursorTop;
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, currentLineCursor-1);
+            Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }
