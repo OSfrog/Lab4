@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace VocabularyTrainerLibrary
 {
@@ -9,8 +10,7 @@ namespace VocabularyTrainerLibrary
     {
         private static readonly char[] charSeparator = new char[] { ';' };
 
-        private List<Word> words = new List<Word>(); //Implementera i Save och Add.
-
+        private List<Word> words = new List<Word>(); 
         public WordList(string name, params string[] languages)
         {
             Name = name;
@@ -27,16 +27,9 @@ namespace VocabularyTrainerLibrary
         {
             if (Folder.AppDirectoryExists())
             {
-
-                var fileArray = Directory.EnumerateFiles(Folder.FileDirectory).ToArray();
-                var fileNames = new string[fileArray.Count()];
-
-                for (int i = 0; i < fileNames.Length; i++)
-                {
-                    fileNames[i] = Path.GetFileNameWithoutExtension(fileArray[i]);
-                }
-
-                return fileNames;
+                var files = Directory.EnumerateFiles(Folder.FileDirectory)
+                    .Select(Path.GetFileNameWithoutExtension).ToArray();
+                return files;
             }
             else
             {
@@ -105,7 +98,7 @@ namespace VocabularyTrainerLibrary
 
         public void Add(params string[] translations) //Lägger till ord i listan. Kasta ArgumentException om det är fel antal translations. 
         { //Add argumentexception and refactor the shit out of this!!!!
-            if (translations.Length % Languages.Length == 0)
+            if (translations.Length == Languages.Length)
             {
                 words.Add(new Word(translations));
             }
@@ -117,32 +110,11 @@ namespace VocabularyTrainerLibrary
 
         public void Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
         {
-            var languages = new string[Languages.Length];
-
-            using var streamReader = new StreamReader(Folder.GetFilePath(Name));
-
-            languages = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-
-            while (!streamReader.EndOfStream)
+            if (words.Where(x => x.Translations[translation] == word).Any()) //Checks the word objects in words List if word is in translation.
             {
-                words.Add(new Word(streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries)));
-            }
-
-            streamReader.Close();
-
-            var newArray = words.Where(x => x.Translations[translation] != word).ToArray();
-
-            using StreamWriter streamWriter = new StreamWriter(Folder.GetFilePath(Name));
-            for (int i = 0; i < Languages.Length; i++)
-            {
-                streamWriter.Write($"{languages[i]};");
-            }
-            for (int i = 0; i < newArray.Length; i++)
-            {
-                for (int j = 0; j < newArray[i].Translations.Length; j++)
-                {
-                    streamWriter.Write(j == 0 ? $"{Environment.NewLine}{newArray[i].Translations[j]};" : $"{newArray[i].Translations[j]};");
-                }
+                var wordObjectIndex = words.IndexOf(words.Where(x => x.Translations[translation] == word).First());
+                words.RemoveAt(wordObjectIndex);
+                Save();
             }
         }
         public int Count(string listName) //Räknar och returnerar antal ord i listan.
@@ -153,7 +125,7 @@ namespace VocabularyTrainerLibrary
                 return list.words.Count();
             }
 
-            return 0;
+            return -1;
         }
 
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.

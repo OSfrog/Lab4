@@ -12,7 +12,6 @@ namespace VocabularyTrainerLibrary
         {
             if (!Directory.Exists(LocalAppDirectory + "\\vocabularytrainer"))
             {
-                Console.WriteLine("-directory does not exist.");
                 return false;
             }
             else
@@ -21,15 +20,8 @@ namespace VocabularyTrainerLibrary
             }
         }
 
-        public static void CreateDirectory()
-        {
-            Directory.CreateDirectory(FileDirectory);
-            Console.WriteLine($"-creating directory VocabularyTrainer at path: {FileDirectory}\n");
-        }
+        public static void CreateDirectory() => Directory.CreateDirectory(FileDirectory);
 
-        public static string GetFilePath(string name)
-        {
-            return $"{FileDirectory}\\{name}.dat";
-        }
+        public static string GetFilePath(string name) => $"{FileDirectory}\\{name}.dat";
     }
 }

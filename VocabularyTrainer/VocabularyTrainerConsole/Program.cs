@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerConsole
@@ -16,136 +17,18 @@ namespace VocabularyTrainerConsole
                 switch (ToLowerArguments(args)[0])
                 {
                     case "-lists":
-                        if (args.Length == 1)
-                        {
-                            Console.WriteLine();
-                            if (WordList.GetLists() != null)
-                            {
-                                foreach (var file in WordList.GetLists())
-                                {
-                                    Console.WriteLine(file);
-                                }
-                                Console.WriteLine();
-                            }
-                        }
-                        else
-                        {
-                            PrintInfo();
-                        }
+                        Lists(args);
                         break;
 
                     case "-new":
-                        if (args.Length > 2)
-                        {
-                            var languages = new string[args.Length - 2];
-
-                            for (int i = 0; i < args.Length - 2; i++)
-                            {
-                                languages[i] = args[i + 2];
-                            }
-
-                            var wordList = new WordList(args[1], languages);
-                            var input = "init";
-                            var words = new string[wordList.Languages.Length];
-
-                            Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
-                            while (input != "")
-                            {
-                                for (int i = 0; i < wordList.Languages.Length; i++)
-                                {
-                                    Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
-                                    input = Console.ReadLine();
-                                    if (input != "")
-                                    {
-                                        words[i] = input;
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-
-                                if (input != "")
-                                {
-                                    wordList.Add(words);
-                                    wordList.Save();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            PrintInfo();
-                        }
+                        New(args);
                         break;
 
                     case "-add":
-                        if (args.Length == 2 && WordList.LoadList(args[1]) != null)
-                        {
-                            var count = 0;
-                            var input = "init";
-                            var wordList = WordList.LoadList(args[1]);
-                            var words = new string[wordList.Languages.Length];
-
-                            Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
-                            while (input != "")
-                            {
-                                for (int i = 0; i < wordList.Languages.Length; i++)
-                                {
-                                    Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
-                                    input = Console.ReadLine();
-                                    if (input != "")
-                                    {
-                                        words[i] = input;
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                if (input != "")
-                                {
-                                    wordList.Add(words);
-                                    wordList.Save();
-                                    count++;
-                                }
-                            }
-
-                            Console.WriteLine(count == 1 ? $"\n-added {count} word to list '{wordList.Name}'\n" : $"\n-added {count} words to list '{wordList.Name}'\n");
-                        }
-                        else if (args.Length > 2)
-                        {
-                            PrintInfo();
-                        }
-                        else
-                        {
-
-                            Console.WriteLine($"\n-list '{args[1]}' is invalid, use the '-new' command to append languages to the list before adding words\n");
-                        }
+                        Add(args);
                         break;
                     case "-remove":
-                        if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
-                        {
-                            var removeInLanguage = 0;
-                            var wordList = WordList.LoadList(args[1]);
-                            for (int i = 0; i < wordList.Languages.Length; i++)
-                            {
-                                if (args[2].ToLower() == wordList.Languages[i].ToLower())
-                                {
-                                    removeInLanguage = i;
-                                }
-                            }
-
-                            for (int i = 3; i < args.Length; i++)
-                            {
-                                wordList.Remove(removeInLanguage, args[i]);
-
-                            }
-                            break;
-                        }
-                        else
-                        {
-                            PrintInfo();
-                        }
+                        Remove(args);
                         break;
                     case "-words":
                         if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
@@ -202,6 +85,7 @@ namespace VocabularyTrainerConsole
                     case "-count":
                         if (args.Length == 2)
                         {
+                            var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\VocabularyTrainer\\{args[1]}.dat";
                             var wordList = WordList.LoadList(args[1]);
 
                             if (wordList != null && wordList.Count(args[1]) != 0)
@@ -213,9 +97,8 @@ namespace VocabularyTrainerConsole
                             }
                             else
                             { 
-                                Console.WriteLine(wordList.Languages.Length != 0 ? $"\n-the list '{args[1]}' is empty\n" :
+                                Console.WriteLine(File.Exists(filePath) ? $"\n-the list '{args[1]}' is empty\n" :
                                     $"\n-the list '{args[1]}' does not exist\n");
-                                break;
                             }
                         }
                         else
@@ -228,7 +111,7 @@ namespace VocabularyTrainerConsole
                         break;
 
                     default:
-                        //Console.Clear();
+                        Console.Clear();
                         PrintInfo();
                         break;
                 }
@@ -263,6 +146,172 @@ namespace VocabularyTrainerConsole
             }
 
             return arguments;
+        }
+
+        static void Lists(string[] args)
+        {
+            if (args.Length == 1)
+            {
+                if (WordList.GetLists() != null && WordList.GetLists().Length != 0)
+                {
+                    Console.WriteLine();
+                    foreach (var file in WordList.GetLists())
+                    {
+                        Console.WriteLine(file);
+                    }
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine($"\n-no files found, directory is empty\n");
+                }
+            }
+            else
+            {
+                PrintInfo();
+            }
+        }
+
+        static void New(string[] args)
+        {
+            if (args.Length > 2)
+            {
+                var languages = new string[args.Length - 2];
+
+                for (int i = 0; i < args.Length - 2; i++)
+                {
+                    languages[i] = args[i + 2];
+                }
+
+                var wordList = new WordList(args[1], languages);
+                var input = "init";
+                var words = new string[wordList.Languages.Length];
+
+                Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
+                while (input != "")
+                {
+                    for (int i = 0; i < wordList.Languages.Length; i++)
+                    {
+                        Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
+                        input = Console.ReadLine();
+                        if (input != "")
+                        {
+                            words[i] = input;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    if (input != "")
+                    {
+                        wordList.Add(words);
+                        wordList.Save();
+                    }
+                }
+            }
+            else
+            {
+                PrintInfo();
+            }
+        }
+
+        static void Add(string[] args)
+        {
+            if (args.Length == 2 && WordList.LoadList(args[1]) != null)
+            {
+                var count = 0;
+                var input = "init";
+                var wordList = WordList.LoadList(args[1]);
+                var words = new string[wordList.Languages.Length];
+
+                Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
+                while (input != "")
+                {
+                    for (int i = 0; i < wordList.Languages.Length; i++)
+                    {
+                        Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
+                        input = Console.ReadLine();
+                        if (input != "")
+                        {
+                            words[i] = input;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (input != "")
+                    {
+                        wordList.Add(words);
+                        wordList.Save();
+                        count++;
+                    }
+                }
+
+                Console.WriteLine(count == 1 ? $"\n-added {count} word to list '{wordList.Name}'\n" : $"\n-added {count} words to list '{wordList.Name}'\n");
+            }
+            else if (args.Length == 2 && WordList.LoadList(args[1]) == null)
+            {
+                var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\VocabularyTrainer\\{args[1]}.dat";
+
+                Console.WriteLine(File.Exists(filePath) ? $"\n-list '{args[1]}' is invalid, use the '-new' command to add languages to the list before adding words\n" :
+                   $"\n-list '{args[1]}' does not exist, use the '-new' command to add a new list\n");
+            }
+            else
+            {
+                PrintInfo();
+            }
+        }
+
+        static void Remove(string[] args)
+        {
+            if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
+            {
+                var removeInLanguage = 0;
+                var wordList = WordList.LoadList(args[1]);
+                var words = wordList.Count(args[1]);
+                for (int i = 0; i < wordList.Languages.Length; i++)
+                {
+                    if (args[2].ToLower() == wordList.Languages[i].ToLower())
+                    {
+                        removeInLanguage = i;
+                    }
+                }
+
+                for (int i = 3; i < args.Length; i++)
+                {
+                    wordList.Remove(removeInLanguage, args[i]);
+                }
+
+                words -= wordList.Count(args[1]);
+
+                var result = words > 1 ? $"\n-removed {words} words from list '{args[1]}'\n" :
+                   words == 1 ? $"\n-removed {words} word from list '{args[1]}'\n" :
+                   $"\n-no words removed from list '{args[1]}'\n";
+
+                Console.WriteLine(result);
+            }
+            else
+            {
+                PrintInfo();
+            }
+        }
+
+        static void Words(string[] args)
+        {
+
+        }
+
+        static void Count(string[] args)
+        {
+
+        }
+
+        static void Practice(string[] args)
+        {
+
         }
     }
 }
