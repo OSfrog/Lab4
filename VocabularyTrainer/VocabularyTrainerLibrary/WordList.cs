@@ -97,7 +97,7 @@ namespace VocabularyTrainerLibrary
         }
 
         public void Add(params string[] translations) //Lägger till ord i listan. Kasta ArgumentException om det är fel antal translations. 
-        { //Add argumentexception and refactor the shit out of this!!!!
+        {
             if (translations.Length == Languages.Length && !translations.Any(x => string.IsNullOrWhiteSpace(x)))
             {
                 words.Add(new Word(translations));
@@ -149,10 +149,19 @@ namespace VocabularyTrainerLibrary
             var list = LoadList(Name);
             return list.words;
         }
-        public Word GetWordToPractice()  //Returnerar slumpmässigt Word från listan, med slumpmässigt valda 
-        {                               // FromLanguage och ToLanguage (dock inte samma). 
+        public Word GetWordToPractice()  
+        {  
+            var random = new Random();
+            var int1 = random.Next(Languages.Length);
+            var int2 = random.Next(Languages.Length);
+            var randomTranslations = words[random.Next(words.Count)].Translations;
 
-            return null;
+            while (int1 == int2)
+            {
+                int1 = random.Next(Languages.Length);
+            }
+
+            return new Word(int1, int2, randomTranslations);
         }
     }
 }
