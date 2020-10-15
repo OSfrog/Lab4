@@ -77,7 +77,7 @@ namespace VocabularyTrainerConsole
 
         static void New(string[] args)
         {
-            if (args.Length > 2)
+            if (args.Length > 3)
             {
                 var languages = new string[args.Length - 2];
 
@@ -87,32 +87,9 @@ namespace VocabularyTrainerConsole
                 }
 
                 var wordList = new WordList(args[1], languages);
-                var input = "init";
 
-                Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
-                while (input != "")
-                {
-                    var words = new string[wordList.Languages.Length];
-                    for (int i = 0; i < wordList.Languages.Length; i++)
-                    {
-                        Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
-                        input = Console.ReadLine();
-                        if (input != "")
-                        {
-                            words[i] = input;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                AddWords(wordList);
 
-                    if (input != "")
-                    {
-                        wordList.Add(words);
-                        wordList.Save();
-                    }
-                }
                 Console.WriteLine($"-created list '{wordList.Name}' and added {wordList.Count(wordList.Name)} words");
             }
             else
@@ -125,36 +102,16 @@ namespace VocabularyTrainerConsole
         {
             if (args.Length == 2 && WordList.LoadList(args[1]) != null)
             {
-                var count = 0;
-                var input = "init";
                 var wordList = WordList.LoadList(args[1]);
+                var count = wordList.Count(args[1]);
 
-                Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
-                while (input != "")
-                {
-                    var words = new string[wordList.Languages.Length];
-                    for (int i = 0; i < wordList.Languages.Length; i++)
-                    {
-                        Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
-                        input = Console.ReadLine();
-                        if (input != "")
-                        {
-                            words[i] = input;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    if (input != "")
-                    {
-                        wordList.Add(words);
-                        wordList.Save();
-                        count++;
-                    }
-                }
+                AddWords(wordList);
 
-                Console.WriteLine(count == 1 ? $"\n-added {count} word to list '{wordList.Name}'\n" : $"\n-added {count} words to list '{wordList.Name}'\n");
+                count = wordList.Count(args[1]) - count;
+
+                Console.WriteLine(count > 1 ? $"\n-added {count} words to list '{args[1]}'\n" 
+                    : count == 1 ? $"\n-added {count} word to list '{args[1]}'\n"
+                    : $"\n-no words added to list '{args[1]}'\n");
             }
             else if (args.Length == 2 && WordList.LoadList(args[1]) == null)
             {
@@ -340,9 +297,35 @@ namespace VocabularyTrainerConsole
             Console.WriteLine("-practice <listname>\n");
         }
 
-        static void AddWords(WordList wordlist)
+        static void AddWords(WordList wordList)
         {
+           
+            var input = "init";
 
+            Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
+            while (input != "")
+            {
+                var words = new string[wordList.Languages.Length];
+                for (int i = 0; i < wordList.Languages.Length; i++)
+                {
+                    Console.Write(i == 0 ? $"Add a new word ({wordList.Languages[i]}): " : $"Add the {wordList.Languages[i]} translation: ");
+                    input = Console.ReadLine();
+                    if (input != "")
+                    {
+                        words[i] = input;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                if (input != "")
+                {
+                    wordList.Add(words);
+                    wordList.Save();
+                }
+            }
         }
         static string[] ToLowerArguments(string[] args)
         {
