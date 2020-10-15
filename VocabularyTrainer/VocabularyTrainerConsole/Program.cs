@@ -50,7 +50,6 @@ namespace VocabularyTrainerConsole
             }
         }
 
-
         static void Lists(string[] args)
         {
             if (args.Length == 1)
@@ -109,7 +108,7 @@ namespace VocabularyTrainerConsole
 
                 count = wordList.Count(args[1]) - count;
 
-                Console.WriteLine(count > 1 ? $"\n-added {count} words to list '{args[1]}'\n" 
+                Console.WriteLine(count > 1 ? $"\n-added {count} words to list '{args[1]}'\n"
                     : count == 1 ? $"\n-added {count} word to list '{args[1]}'\n"
                     : $"\n-no words added to list '{args[1]}'\n");
             }
@@ -162,11 +161,11 @@ namespace VocabularyTrainerConsole
 
         static void Words(string[] args)
         {
-            if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
+            if (args.Length >= 2 && WordList.LoadList(args[1]) != null) //Refactor this
             {
                 var sortByLanguage = 0;
                 var wordList = WordList.LoadList(args[1]);
-                if (args.Length == 3)
+                if (args.Length == 3 && wordList.Count(args[1]) != 0)
                 {
                     for (int i = 0; i < wordList.Languages.Length; i++)
                     {
@@ -186,7 +185,7 @@ namespace VocabularyTrainerConsole
                     });
 
                 }
-                else
+                else if (wordList.Count(args[1]) != 0)
                 {
                     foreach (var language in wordList.Languages)
                     {
@@ -201,11 +200,12 @@ namespace VocabularyTrainerConsole
                         }
                         Console.WriteLine();
                     }
+                } 
+                else
+                {
+                    Console.WriteLine(WordList.LoadList(args[1]) != null ? $"\n-list '{args[1]}' is empty\n"
+                        : $"\n-the list '{args[1]}' does not exist\n");
                 }
-            }
-            else if (args.Length == 2 && WordList.LoadList(args[1]) == null)
-            {
-                Console.WriteLine($"\n-list '{args[1]}' is empty or does not exist\n");
             }
             else
             {
@@ -267,7 +267,7 @@ namespace VocabularyTrainerConsole
                     wordCounter++;
                     Console.Write($"-wrong answer, the correct translation was '{word.Translations[word.ToLanguage]}'" +
                         $"      (press enter to stop or any other key to continue)");
-                     var keyInput = Console.ReadKey().Key;
+                    var keyInput = Console.ReadKey().Key;
 
                     if (keyInput == ConsoleKey.Enter)
                     {
@@ -280,7 +280,7 @@ namespace VocabularyTrainerConsole
             }
 
             Console.WriteLine($"-{wordCounter} words were practiced on");
-            Console.WriteLine(correctCounter != 0 ? $"-{correctCounter/wordCounter:0%} of answers were correct" 
+            Console.WriteLine(correctCounter != 0 ? $"-{correctCounter / wordCounter:0%} of answers were correct"
                 : $"-no answers were correct");
             Console.ReadKey();
         }
@@ -299,7 +299,7 @@ namespace VocabularyTrainerConsole
 
         static void AddWords(WordList wordList)
         {
-           
+
             var input = "init";
 
             Console.WriteLine("\nPress Enter (empty line) to stop input of new words.\n");
