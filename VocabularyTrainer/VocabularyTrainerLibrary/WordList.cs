@@ -108,14 +108,17 @@ namespace VocabularyTrainerLibrary
             }
         }
 
-        public void Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
+        public bool Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
         {
-            if (words.Where(x => x.Translations[translation] == word).Any()) //Checks the word objects in words List if word is in translation.
+            if (words.Where(x => x.Translations[translation] == word).Any()) //Checks the word objects in the List if argument is in Translation.
             {
                 var wordObjectIndex = words.IndexOf(words.Where(x => x.Translations[translation] == word).First());
                 words.RemoveAt(wordObjectIndex);
                 Save();
+                return true;
             }
+            
+            return false;
         }
         public int Count(string listName) //Räknar och returnerar antal ord i listan.
         {
