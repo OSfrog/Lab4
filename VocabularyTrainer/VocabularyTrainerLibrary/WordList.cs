@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace VocabularyTrainerLibrary
 {
@@ -10,7 +9,7 @@ namespace VocabularyTrainerLibrary
     {
         private static readonly char[] charSeparator = new char[] { ';' };
 
-        private List<Word> words = new List<Word>(); 
+        private List<Word> words = new List<Word>();
         public WordList(string name, params string[] languages)
         {
             Name = name;
@@ -90,7 +89,7 @@ namespace VocabularyTrainerLibrary
             {
                 for (int i = 0; i < wordArray.Translations.Length; i++)
                 {
-                    streamWriter.Write( i != Languages.Length - 1 ? $"{wordArray.Translations[i]};" : $"{wordArray.Translations[i]};{Environment.NewLine}");
+                    streamWriter.Write(i != Languages.Length - 1 ? $"{wordArray.Translations[i]};" : $"{wordArray.Translations[i]};{Environment.NewLine}");
                 }
             }
 
@@ -114,10 +113,11 @@ namespace VocabularyTrainerLibrary
             {
                 var wordObjectIndex = words.IndexOf(words.Where(x => x.Translations[translation] == word).First());
                 words.RemoveAt(wordObjectIndex);
+                
                 Save();
                 return true;
             }
-            
+
             return false;
         }
         public int Count(string listName) //Räknar och returnerar antal ord i listan.
@@ -134,8 +134,6 @@ namespace VocabularyTrainerLibrary
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
         {                                                                         //showTranslations = Callback som anropas för varje ord i listan.
             {
-                var words = ReturnWords();
-
                 showTranslations(Languages);
                 var sortedList = words.OrderBy(x => x.Translations[sortByTranslation]).ToArray();
 
@@ -147,13 +145,17 @@ namespace VocabularyTrainerLibrary
         }
 
 
-        public List<Word> ReturnWords()
+        public void List(Action<string[]> showTranslations)
         {
-            var list = LoadList(Name);
-            return list.words;
+            showTranslations(Languages);
+
+            foreach (var word in words)
+            {
+                showTranslations(word.Translations);
+            }
         }
-        public Word GetWordToPractice()  
-        {  
+        public Word GetWordToPractice()
+        {
             var random = new Random();
             var int1 = random.Next(Languages.Length);
             var int2 = random.Next(Languages.Length);

@@ -127,11 +127,12 @@ namespace VocabularyTrainerConsole
 
         static void Remove(string[] args)
         {
-            if (args.Length >= 2 && WordList.LoadList(args[1]) != null)
+            if (args.Length > 2 && WordList.LoadList(args[1]) != null)
             {
                 var removeInLanguage = 0;
                 var wordList = WordList.LoadList(args[1]);
                 var words = wordList.Count(args[1]);
+
                 for (int i = 0; i < wordList.Languages.Length; i++)
                 {
                     if (args[2].ToLower() == wordList.Languages[i].ToLower())
@@ -155,7 +156,7 @@ namespace VocabularyTrainerConsole
             }
             else
             {
-                PrintInfo();
+                Console.WriteLine("\n-listname, language and word(s) is needed for Remove command\n");
             }
         }
 
@@ -165,6 +166,7 @@ namespace VocabularyTrainerConsole
             {
                 var sortByLanguage = 0;
                 var wordList = WordList.LoadList(args[1]);
+
                 if (args.Length == 3 && wordList.Count(args[1]) != 0)
                 {
                     for (int i = 0; i < wordList.Languages.Length; i++)
@@ -192,14 +194,15 @@ namespace VocabularyTrainerConsole
                         Console.Write(language.ToUpper().PadRight(20));
                     }
                     Console.WriteLine();
-                    foreach (var word in wordList.ReturnWords())
+
+                    wordList.List(x =>
                     {
-                        foreach (var translation in word.Translations)
+                        foreach (var words in x)
                         {
-                            Console.Write(translation.PadRight(20));
+                            Console.Write(words.PadRight(20));
                         }
                         Console.WriteLine();
-                    }
+                    });
                 } 
                 else
                 {
