@@ -8,6 +8,7 @@ namespace VocabularyTrainerConsole
     {
         static void Main(string[] args)
         {
+            
             if (args.Length != 0)
             {
                 switch (ToLowerArguments(args)[0])
