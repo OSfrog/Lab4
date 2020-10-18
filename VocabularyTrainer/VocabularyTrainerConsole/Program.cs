@@ -11,32 +11,34 @@ namespace VocabularyTrainerConsole
             
             if (args.Length != 0)
             {
-                switch (ToLowerArguments(args)[0])
+                var lowerArgs = ToLowerArguments(args);
+
+                switch (lowerArgs[0])
                 {
                     case "-lists":
-                        Lists(args);
+                        Lists(lowerArgs);
                         break;
 
                     case "-new":
-                        New(args);
+                        New(lowerArgs);
                         break;
 
                     case "-add":
-                        Add(args);
+                        Add(lowerArgs);
                         break;
                     case "-remove":
-                        Remove(args);
+                        Remove(lowerArgs);
                         break;
                     case "-words":
-                        Words(args);
+                        Words(lowerArgs);
                         break;
 
                     case "-count":
-                        Count(args);
+                        Count(lowerArgs);
                         break;
 
                     case "-practice":
-                        Practice(args);
+                        Practice(lowerArgs);
                         break;
 
                     default:
