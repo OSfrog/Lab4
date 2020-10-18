@@ -43,9 +43,7 @@ namespace VocabularyTrainerLibrary
             if (File.Exists(Folder.GetFilePath(name)) && new FileInfo(Folder.GetFilePath(name)).Length != 0)
             {
                 using var streamReader = new StreamReader(Folder.GetFilePath(name));
-
                 var languageArray = streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries);
-
                 var wordList = new WordList(name, languageArray);
 
                 while (!streamReader.EndOfStream)
@@ -109,26 +107,20 @@ namespace VocabularyTrainerLibrary
 
         public bool Remove(int translation, string word) //translation motsvarar index i Languages. Sök igenom språket och ta bort ordet. 
         {
-            if (words.Where(x => x.Translations[translation] == word).Any()) //Checks the word objects in the List if argument is in Translation.
+            if (words.Any(x => x.Translations[translation] == word)) //Checks the word objects in the List if argument is in Translation.
             {
-                var wordObjectIndex = words.IndexOf(words.Where(x => x.Translations[translation] == word).First());
+                var wordObjectIndex = words.IndexOf(words.First(x => x.Translations[translation] == word)); //Returns index of the first word object found that matches the condition.
                 words.RemoveAt(wordObjectIndex);
-                
+
                 Save();
                 return true;
             }
 
             return false;
         }
-        public int Count(string listName) //Räknar och returnerar antal ord i listan.
+        public int Count() //Räknar och returnerar antal ord i listan.
         {
-            if (File.Exists(Folder.GetFilePath(listName)))
-            {
-                var list = LoadList(listName);
-                return list.words.Count();
-            }
-
-            return -1;
+            return words.Count();
         }
 
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
