@@ -260,7 +260,8 @@ namespace VocabularyTrainerConsole
             {
                 var word = wordList.GetWordToPractice();
 
-                Console.Write($"-translate the {wordList.Languages[word.FromLanguage]} word {word.Translations[word.FromLanguage]} to {wordList.Languages[word.ToLanguage]}: ");
+                Console.Write($"-translate the {wordList.Languages[word.FromLanguage]} word " +
+                    $"{word.Translations[word.FromLanguage]} to {wordList.Languages[word.ToLanguage]}: ");
                 var input = Console.ReadLine();
                 if (input == "")
                 {

@@ -24,21 +24,18 @@ namespace VocabularyTrainerLibrary
 
         public static string[] GetLists()
         {
-            if (Folder.AppDirectoryExists())
-            {
-                var files = Directory.EnumerateFiles(Folder.FileDirectory)
-                    .Select(Path.GetFileNameWithoutExtension).ToArray();
-                return files;
-            }
-            else
-            {
-                Folder.CreateDirectory();
-                return null;
-            }
+            Folder.CreateDirectory();
+
+            var files = Directory.EnumerateFiles(Folder.FileDirectory)
+                .Select(Path.GetFileNameWithoutExtension)
+                .ToArray();
+            return files;
+
         }
 
         public static WordList LoadList(string name) //Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
         {
+            Folder.CreateDirectory();
 
             if (File.Exists(Folder.GetFilePath(name)) && new FileInfo(Folder.GetFilePath(name)).Length != 0)
             {
@@ -60,21 +57,14 @@ namespace VocabularyTrainerLibrary
                     return null;
                 }
             }
-            else
-            {
-                if (!Folder.AppDirectoryExists())
-                    Folder.CreateDirectory();
-            }
+
             return null;
         }
 
         public void Save() //Sparar listan till en fil med samma namn som listan och filändelse .dat
         {
+            Folder.CreateDirectory();
 
-            if (!Folder.AppDirectoryExists())
-            {
-                Folder.CreateDirectory();
-            }
             var filePath = Folder.GetFilePath(Name);
 
             using var streamWriter = new StreamWriter(filePath, false);

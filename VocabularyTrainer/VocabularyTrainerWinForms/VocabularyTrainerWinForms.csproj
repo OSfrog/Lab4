@@ -46,14 +46,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="ControlMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlMain.Designer.cs">
+      <DependentUpon>ControlMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ControlDataGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlDataGrid.Designer.cs">
+      <DependentUpon>ControlDataGrid.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ControlMain.resx">
+      <DependentUpon>ControlMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +81,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ControlDataGrid.resx">
+      <DependentUpon>ControlDataGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\MainForm.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\VocabularyTrainerLibrary.Word.datasource" />
+    <None Include="Properties\DataSources\VocabularyTrainerLibrary.WordList.datasource" />
+    <None Include="Properties\DataSources\VocabularyTrainerWinForms.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\VocabularyTrainerWinForms.Properties.Settings.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VocabularyTrainerLibrary\VocabularyTrainerLibrary.csproj">
+      <Project>{dafe73a4-9f74-42a8-a3a9-97bbe818a1d0}</Project>
+      <Name>VocabularyTrainerLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

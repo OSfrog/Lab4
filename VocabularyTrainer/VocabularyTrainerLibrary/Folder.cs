@@ -8,18 +8,6 @@ namespace VocabularyTrainerLibrary
         public static string FileDirectory  => Path.Combine(LocalAppDirectory, "VocabularyTrainer");
         public static string LocalAppDirectory  => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        public static bool AppDirectoryExists()
-        {
-            if (!Directory.Exists(LocalAppDirectory + "\\vocabularytrainer"))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
         public static void CreateDirectory() => Directory.CreateDirectory(FileDirectory);
 
         public static string GetFilePath(string name) => $"{FileDirectory}\\{name}.dat";

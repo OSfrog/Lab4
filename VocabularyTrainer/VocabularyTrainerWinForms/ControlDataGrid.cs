@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerWinForms
 {
-    public partial class Form1 : Form
+    public partial class ControlDataGrid : UserControl
     {
-        public Form1()
+        public ControlDataGrid()
         {
             InitializeComponent();
+
+            //var list = WordList.LoadList();
         }
     }
 }
