@@ -117,7 +117,6 @@ namespace VocabularyTrainerLibrary
         public void List(int sortByTranslation, Action<string[]> showTranslations) //sortByTranslation = Vilket språk listan ska sorteras på.
         {                                                                         //showTranslations = Callback som anropas för varje ord i listan.
             {
-                showTranslations(Languages);
                 var sortedList = words.OrderBy(x => x.Translations[sortByTranslation]).ToArray();
 
                 foreach (var word in sortedList)
@@ -130,7 +129,6 @@ namespace VocabularyTrainerLibrary
 
         public void List(Action<string[]> showTranslations)
         {
-            showTranslations(Languages);
 
             foreach (var word in words)
             {

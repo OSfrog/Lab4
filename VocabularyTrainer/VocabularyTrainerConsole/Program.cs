@@ -184,6 +184,13 @@ namespace VocabularyTrainerConsole
                         }
                     }
 
+                    Console.WriteLine();
+                    foreach (var language in wordList.Languages)
+                    {
+                        Console.Write(language.ToUpper().PadRight(20));
+                    }
+                    Console.WriteLine();
+
                     wordList.List(sortByLanguage, x =>
                     {
                         foreach (var words in x)
@@ -192,10 +199,11 @@ namespace VocabularyTrainerConsole
                         }
                         Console.WriteLine();
                     });
-
+                    Console.WriteLine();
                 }
                 else if (wordList.Count() != 0)
                 {
+                    Console.WriteLine();
                     foreach (var language in wordList.Languages)
                     {
                         Console.Write(language.ToUpper().PadRight(20));
@@ -210,6 +218,7 @@ namespace VocabularyTrainerConsole
                         }
                         Console.WriteLine();
                     });
+                    Console.WriteLine();
                 } 
                 else
                 {

@@ -17,6 +17,8 @@ namespace VocabularyTrainerWinForms
         public ControlDataGrid()
         {
             InitializeComponent();
+            Dock = DockStyle.Fill;
+            
         }
 
         private void ControlDataGrid_Load(object sender, EventArgs e)

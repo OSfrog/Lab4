@@ -12,7 +12,7 @@ namespace VocabularyTrainerWinForms
         public ControlMain()
         {
             InitializeComponent();
-            Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            Dock = DockStyle.Fill;
         }
 
         public string SelectedList { get; set; }

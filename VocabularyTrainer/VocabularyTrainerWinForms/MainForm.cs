@@ -14,14 +14,14 @@ namespace VocabularyTrainerWinForms
 
             controlMain.ButtonClicked += ControlMain_ButtonClicked;
 
-            Controls.Add(controlMain);
+            Panel.Controls.Add(controlMain);
         }
 
         private void ControlMain_ButtonClicked(object sender, EventArgs e)
         {
             controlMain.Visible = false;
             SelectedList = controlMain.SelectedList;
-            Controls.Add(dataGrid);
+            Panel.Controls.Add(dataGrid);
         }
     }
 }
