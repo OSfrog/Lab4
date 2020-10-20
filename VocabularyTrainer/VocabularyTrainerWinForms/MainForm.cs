@@ -7,6 +7,7 @@ namespace VocabularyTrainerWinForms
     {
         public ControlMain controlMain = new ControlMain();
         public ControlDataGrid dataGrid = new ControlDataGrid();
+        public static string SelectedList { get; set; }
         public MainForm()
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace VocabularyTrainerWinForms
         private void ControlMain_ButtonClicked(object sender, EventArgs e)
         {
             controlMain.Visible = false;
+            SelectedList = controlMain.SelectedList;
             Controls.Add(dataGrid);
         }
     }

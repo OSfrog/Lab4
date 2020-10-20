@@ -18,5 +18,25 @@ namespace VocabularyTrainerWinForms
         {
             InitializeComponent();
         }
+
+        private void ControlDataGrid_Load(object sender, EventArgs e)
+        {
+            var wordList = WordList.LoadList(MainForm.SelectedList);
+
+            //DataGrid.DataSource = wordList;
+            foreach (var language in wordList.Languages)
+            {
+                DataGrid.Columns.Add("C1", language.ToUpper());
+            }
+
+
+
+            wordList.List(x =>
+            {
+                DataGrid.Rows.Add(x);
+            });
+
+
+        }
     }
 }

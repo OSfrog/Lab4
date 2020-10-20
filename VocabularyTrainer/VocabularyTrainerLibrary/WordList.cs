@@ -73,6 +73,7 @@ namespace VocabularyTrainerLibrary
             {
                 streamWriter.Write(i != Languages.Length - 1 ? $"{Languages[i]};" : $"{Languages[i]};{Environment.NewLine}");
             }
+
             foreach (var wordArray in words)
             {
                 for (int i = 0; i < wordArray.Translations.Length; i++)

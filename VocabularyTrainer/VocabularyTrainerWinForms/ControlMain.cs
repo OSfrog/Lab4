@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
@@ -11,8 +12,10 @@ namespace VocabularyTrainerWinForms
         public ControlMain()
         {
             InitializeComponent();
+            Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         }
 
+        public string SelectedList { get; set; }
 
         private void ControlMain_Load(object sender, EventArgs e)
         {
@@ -43,6 +46,7 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonSelect_Click(object sender, EventArgs e)
         {
+            SelectedList = ListBoxWordLists.SelectedItem.ToString();
             ButtonClicked?.Invoke(this, e);
         }
 
