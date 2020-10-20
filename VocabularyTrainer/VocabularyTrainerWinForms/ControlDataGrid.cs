@@ -13,11 +13,10 @@ namespace VocabularyTrainerWinForms
 {
     public partial class ControlDataGrid : UserControl
     {
+
         public ControlDataGrid()
         {
             InitializeComponent();
-
-            //var list = WordList.LoadList();
         }
     }
 }

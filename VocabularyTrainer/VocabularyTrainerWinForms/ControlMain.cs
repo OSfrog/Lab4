@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
@@ -18,6 +12,7 @@ namespace VocabularyTrainerWinForms
         {
             InitializeComponent();
         }
+
 
         private void ControlMain_Load(object sender, EventArgs e)
         {
@@ -37,12 +32,19 @@ namespace VocabularyTrainerWinForms
                 {
                     ListBoxLanguages.Items.Add(language);
                 }
+
+                ButtonSelect.Enabled = true;
+            }
+            else
+            {
+                ButtonSelect.Enabled = false;
             }
         }
 
         private void ButtonSelect_Click(object sender, EventArgs e)
         {
-            ButtonClicked?.Invoke(this, null);
+            ButtonClicked?.Invoke(this, e);
         }
+
     }
 }

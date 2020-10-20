@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
-using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerWinForms
 {
     public partial class MainForm : Form
     {
+        public ControlMain controlMain = new ControlMain();
+        public ControlDataGrid dataGrid = new ControlDataGrid();
         public MainForm()
         {
             InitializeComponent();
-            var controlMain = new ControlMain();
-            var dataGrid = new ControlDataGrid();
 
             controlMain.ButtonClicked += ControlMain_ButtonClicked;
 
@@ -19,7 +18,8 @@ namespace VocabularyTrainerWinForms
 
         private void ControlMain_ButtonClicked(object sender, EventArgs e)
         {
-            Controls.Add(new ControlDataGrid());
+            controlMain.Visible = false;
+            Controls.Add(dataGrid);
         }
     }
 }

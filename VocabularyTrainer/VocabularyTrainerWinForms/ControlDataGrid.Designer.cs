@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.DataGrid = new System.Windows.Forms.DataGridView();
             this.wordListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // DataGrid
             // 
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataGrid.AllowUserToDeleteRows = false;
+            this.DataGrid.AllowUserToOrderColumns = true;
+            this.DataGrid.AutoGenerateColumns = false;
+            this.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nameDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.wordListBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 72;
-            this.dataGridView1.RowTemplate.Height = 31;
-            this.dataGridView1.Size = new System.Drawing.Size(824, 514);
-            this.dataGridView1.TabIndex = 0;
+            this.DataGrid.DataSource = this.wordListBindingSource;
+            this.DataGrid.Location = new System.Drawing.Point(0, 0);
+            this.DataGrid.Name = "DataGrid";
+            this.DataGrid.ReadOnly = true;
+            this.DataGrid.RowHeadersWidth = 72;
+            this.DataGrid.RowTemplate.Height = 31;
+            this.DataGrid.Size = new System.Drawing.Size(824, 514);
+            this.DataGrid.TabIndex = 0;
             // 
             // wordListBindingSource
             // 
@@ -70,10 +70,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.DataGrid);
             this.Name = "ControlDataGrid";
             this.Size = new System.Drawing.Size(824, 514);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -81,7 +81,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView DataGrid;
         private System.Windows.Forms.BindingSource wordListBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
     }
