@@ -16,6 +16,7 @@ namespace VocabularyTrainerWinForms
         public event EventHandler DataGridButtons;
 
         private MainForm mainform;
+        private WordList wordlist { get; set; }
         public ControlDataGrid(MainForm form)
         {
             InitializeComponent();
@@ -24,29 +25,42 @@ namespace VocabularyTrainerWinForms
             
         }
 
-        private void ControlDataGrid_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             DataGridButtons?.Invoke(this, null);
+           
         }
 
-        private void DataGrid_Enter(object sender, EventArgs e)
+
+
+        private void ControlDataGrid_VisibleChanged(object sender, EventArgs e)
         {
-            var wordList = WordList.LoadList(mainform.controlMain.SelectedList);
+            DataGrid.Rows.Clear();
+            DataGrid.Columns.Clear();
+            DataGrid.Refresh();
 
-            foreach (var language in wordList.Languages)
+            if (this.Visible == true)
             {
-                DataGrid.Columns.Add("C1", language.ToUpper());
+                var wordList = WordList.LoadList(mainform.controlMain.SelectedList);
+                wordlist = wordList;
+
+                foreach (var language in wordList.Languages)
+                {
+                    DataGrid.Columns.Add("C1", language.ToUpper());
+                }
+
+                wordList.List(x =>
+                {
+                    DataGrid.Rows.Add(x);
+                });
             }
-
-            wordList.List(x =>
-            {
-                DataGrid.Rows.Add(x);
-            });
         }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            DataGrid.Rows.Add();
+        }
+
     }
 }

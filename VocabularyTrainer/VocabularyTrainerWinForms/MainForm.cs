@@ -17,6 +17,7 @@ namespace VocabularyTrainerWinForms
 
             Panel.Controls.Add(controlMain);
             Panel.Controls.Add(dataGrid);
+            dataGrid.Visible = false;
         }
 
         private void DataGrid_ButtonBack(object sender, EventArgs e)

@@ -34,9 +34,9 @@
             this.DataGrid = new System.Windows.Forms.DataGridView();
             this.wordListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ButtonAdd = new System.Windows.Forms.Button();
             this.ButtonBack = new System.Windows.Forms.Button();
             this.ButtonRemove = new System.Windows.Forms.Button();
-            this.ButtonAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).BeginInit();
             this.TableLayoutPanel.SuspendLayout();
@@ -65,7 +65,7 @@
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EnableHeadersVisualStyles = false;
             this.DataGrid.Location = new System.Drawing.Point(4, 4);
-            this.DataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataGrid.Margin = new System.Windows.Forms.Padding(4);
             this.DataGrid.MultiSelect = false;
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ReadOnly = true;
@@ -83,7 +83,6 @@
             this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGrid.Size = new System.Drawing.Size(791, 428);
             this.DataGrid.TabIndex = 0;
-            this.DataGrid.Enter += new System.EventHandler(this.DataGrid_Enter);
             // 
             // wordListBindingSource
             // 
@@ -111,6 +110,19 @@
             this.TableLayoutPanel.Size = new System.Drawing.Size(799, 474);
             this.TableLayoutPanel.TabIndex = 1;
             // 
+            // ButtonAdd
+            // 
+            this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.ButtonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonAdd.Location = new System.Drawing.Point(352, 436);
+            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.ButtonAdd.Name = "ButtonAdd";
+            this.ButtonAdd.Size = new System.Drawing.Size(94, 38);
+            this.ButtonAdd.TabIndex = 3;
+            this.ButtonAdd.Text = "Add";
+            this.ButtonAdd.UseVisualStyleBackColor = true;
+            this.ButtonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+            // 
             // ButtonBack
             // 
             this.ButtonBack.AutoSize = true;
@@ -137,28 +149,16 @@
             this.ButtonRemove.Text = "Remove";
             this.ButtonRemove.UseVisualStyleBackColor = true;
             // 
-            // ButtonAdd
-            // 
-            this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.ButtonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonAdd.Location = new System.Drawing.Point(352, 436);
-            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(0);
-            this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(94, 38);
-            this.ButtonAdd.TabIndex = 3;
-            this.ButtonAdd.Text = "Add";
-            this.ButtonAdd.UseVisualStyleBackColor = true;
-            // 
             // ControlDataGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TableLayoutPanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ControlDataGrid";
             this.Size = new System.Drawing.Size(799, 474);
-            this.Load += new System.EventHandler(this.ControlDataGrid_Load);
+            this.VisibleChanged += new System.EventHandler(this.ControlDataGrid_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).EndInit();
             this.TableLayoutPanel.ResumeLayout(false);
