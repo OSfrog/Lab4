@@ -8,19 +8,28 @@ namespace VocabularyTrainerWinForms
 {
     public partial class ControlMain : UserControl
     {
-        public event EventHandler ButtonClicked;
+        public event EventHandler Clicked;
         public ControlMain()
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
         }
 
-        public string SelectedList { get; set; }
+        public string SelectedList 
+        { get 
+            { return ListBoxWordLists.SelectedItem.ToString(); } 
+        }
+
 
         private void ControlMain_Load(object sender, EventArgs e)
         {
             wordListBindingSource.DataSource = WordList.GetLists();
             ListBoxWordLists.ClearSelected();
+        }
+
+        private void ListBoxWordLists_DoubleClick(object sender, EventArgs e)
+        {
+            Clicked?.Invoke(this, null);
         }
 
         private void ListBoxWordLists_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,9 +55,9 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonSelect_Click(object sender, EventArgs e)
         {
-            SelectedList = ListBoxWordLists.SelectedItem.ToString();
-            ButtonClicked?.Invoke(this, e);
+            Clicked?.Invoke(this, null);
         }
+
 
     }
 }

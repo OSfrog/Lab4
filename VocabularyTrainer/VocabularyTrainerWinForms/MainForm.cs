@@ -6,21 +6,20 @@ namespace VocabularyTrainerWinForms
     public partial class MainForm : Form
     {
         public ControlMain controlMain = new ControlMain();
-        public ControlDataGrid dataGrid = new ControlDataGrid();
-        public static string SelectedList { get; set; }
+        private ControlDataGrid dataGrid;
         public MainForm()
         {
             InitializeComponent();
 
-            controlMain.ButtonClicked += ControlMain_ButtonClicked;
+            controlMain.Clicked += ControlMain_DoubleClick;
+            dataGrid  = new ControlDataGrid(this);
 
             Panel.Controls.Add(controlMain);
         }
 
-        private void ControlMain_ButtonClicked(object sender, EventArgs e)
+        private void ControlMain_DoubleClick(object sender, EventArgs e)
         {
             controlMain.Visible = false;
-            SelectedList = controlMain.SelectedList;
             Panel.Controls.Add(dataGrid);
         }
     }

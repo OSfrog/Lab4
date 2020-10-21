@@ -14,16 +14,18 @@ namespace VocabularyTrainerWinForms
     public partial class ControlDataGrid : UserControl
     {
 
-        public ControlDataGrid()
+        private MainForm mainform;
+        public ControlDataGrid(MainForm form)
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
+            mainform = form;
             
         }
 
         private void ControlDataGrid_Load(object sender, EventArgs e)
         {
-            var wordList = WordList.LoadList(MainForm.SelectedList);
+            var wordList = WordList.LoadList(mainform.controlMain.SelectedList);
 
             //DataGrid.DataSource = wordList;
             foreach (var language in wordList.Languages)
