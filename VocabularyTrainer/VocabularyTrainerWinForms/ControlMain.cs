@@ -8,7 +8,7 @@ namespace VocabularyTrainerWinForms
 {
     public partial class ControlMain : UserControl
     {
-        public event EventHandler Clicked;
+        public event EventHandler MainButtons;
         public ControlMain()
         {
             InitializeComponent();
@@ -16,8 +16,8 @@ namespace VocabularyTrainerWinForms
         }
 
         public string SelectedList 
-        { get 
-            { return ListBoxWordLists.SelectedItem.ToString(); } 
+        {
+            get { return ListBoxWordLists.SelectedItem?.ToString(); } 
         }
 
 
@@ -29,7 +29,7 @@ namespace VocabularyTrainerWinForms
 
         private void ListBoxWordLists_DoubleClick(object sender, EventArgs e)
         {
-            Clicked?.Invoke(this, null);
+            MainButtons?.Invoke(this, null);
         }
 
         private void ListBoxWordLists_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonSelect_Click(object sender, EventArgs e)
         {
-            Clicked?.Invoke(this, null);
+            MainButtons?.Invoke(this, null);
         }
 
 

@@ -29,12 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGrid = new System.Windows.Forms.DataGridView();
             this.wordListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.ButtonBack = new System.Windows.Forms.Button();
+            this.ButtonRemove = new System.Windows.Forms.Button();
+            this.ButtonAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).BeginInit();
+            this.TableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataGrid
@@ -47,46 +52,108 @@
             this.DataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.DataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.TableLayoutPanel.SetColumnSpan(this.DataGrid, 3);
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EnableHeadersVisualStyles = false;
-            this.DataGrid.Location = new System.Drawing.Point(0, 0);
+            this.DataGrid.Location = new System.Drawing.Point(4, 4);
             this.DataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DataGrid.MultiSelect = false;
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DataGrid.RowHeadersVisible = false;
             this.DataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DataGrid.RowTemplate.Height = 31;
             this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGrid.Size = new System.Drawing.Size(799, 474);
+            this.DataGrid.Size = new System.Drawing.Size(791, 428);
             this.DataGrid.TabIndex = 0;
+            this.DataGrid.Enter += new System.EventHandler(this.DataGrid_Enter);
             // 
             // wordListBindingSource
             // 
             this.wordListBindingSource.DataSource = typeof(VocabularyTrainerLibrary.WordList);
             // 
+            // TableLayoutPanel
+            // 
+            this.TableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TableLayoutPanel.ColumnCount = 3;
+            this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.TableLayoutPanel.Controls.Add(this.ButtonAdd, 0, 1);
+            this.TableLayoutPanel.Controls.Add(this.DataGrid, 0, 0);
+            this.TableLayoutPanel.Controls.Add(this.ButtonBack, 0, 1);
+            this.TableLayoutPanel.Controls.Add(this.ButtonRemove, 2, 1);
+            this.TableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.TableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.TableLayoutPanel.Name = "TableLayoutPanel";
+            this.TableLayoutPanel.RowCount = 2;
+            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.19409F));
+            this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.805907F));
+            this.TableLayoutPanel.Size = new System.Drawing.Size(799, 474);
+            this.TableLayoutPanel.TabIndex = 1;
+            // 
+            // ButtonBack
+            // 
+            this.ButtonBack.AutoSize = true;
+            this.ButtonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonBack.Location = new System.Drawing.Point(0, 436);
+            this.ButtonBack.Margin = new System.Windows.Forms.Padding(0);
+            this.ButtonBack.Name = "ButtonBack";
+            this.ButtonBack.Size = new System.Drawing.Size(94, 38);
+            this.ButtonBack.TabIndex = 1;
+            this.ButtonBack.Text = "←";
+            this.ButtonBack.UseVisualStyleBackColor = true;
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
+            // 
+            // ButtonRemove
+            // 
+            this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.ButtonRemove.AutoSize = true;
+            this.ButtonRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonRemove.Location = new System.Drawing.Point(618, 436);
+            this.ButtonRemove.Margin = new System.Windows.Forms.Padding(0);
+            this.ButtonRemove.Name = "ButtonRemove";
+            this.ButtonRemove.Size = new System.Drawing.Size(94, 38);
+            this.ButtonRemove.TabIndex = 2;
+            this.ButtonRemove.Text = "Remove";
+            this.ButtonRemove.UseVisualStyleBackColor = true;
+            // 
+            // ButtonAdd
+            // 
+            this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.ButtonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonAdd.Location = new System.Drawing.Point(352, 436);
+            this.ButtonAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.ButtonAdd.Name = "ButtonAdd";
+            this.ButtonAdd.Size = new System.Drawing.Size(94, 38);
+            this.ButtonAdd.TabIndex = 3;
+            this.ButtonAdd.Text = "Add";
+            this.ButtonAdd.UseVisualStyleBackColor = true;
+            // 
             // ControlDataGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.DataGrid);
+            this.Controls.Add(this.TableLayoutPanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ControlDataGrid";
@@ -94,6 +161,8 @@
             this.Load += new System.EventHandler(this.ControlDataGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).EndInit();
+            this.TableLayoutPanel.ResumeLayout(false);
+            this.TableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -102,5 +171,9 @@
 
         private System.Windows.Forms.DataGridView DataGrid;
         private System.Windows.Forms.BindingSource wordListBindingSource;
+        private System.Windows.Forms.TableLayoutPanel TableLayoutPanel;
+        private System.Windows.Forms.Button ButtonBack;
+        private System.Windows.Forms.Button ButtonAdd;
+        private System.Windows.Forms.Button ButtonRemove;
     }
 }
