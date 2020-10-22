@@ -58,6 +58,16 @@ namespace VocabularyTrainerWinForms
             MainButtons?.Invoke(this, null);
         }
 
+        private void ButtonNew_Click(object sender, EventArgs e)
+        {
+            var listForm = new NewListForm();
+            listForm.Show();
+            
+        }
 
+        private void ControlMain_Enter(object sender, EventArgs e)
+        {
+            wordListBindingSource.DataSource = WordList.GetLists();
+        }
     }
 }

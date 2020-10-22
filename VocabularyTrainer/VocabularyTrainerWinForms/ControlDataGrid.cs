@@ -22,14 +22,14 @@ namespace VocabularyTrainerWinForms
             InitializeComponent();
             Dock = DockStyle.Fill;
             mainform = form;
-            
+
         }
 
 
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             DataGridButtons?.Invoke(this, null);
-           
+
         }
 
 
@@ -62,5 +62,14 @@ namespace VocabularyTrainerWinForms
             DataGrid.Rows.Add();
         }
 
+        private void ButtonRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in DataGrid.SelectedRows)
+            {
+                DataGrid.Rows.RemoveAt(item.Index);
+            }
+
+            var rowCollection = DataGrid.Rows;
+        }
     }
 }
