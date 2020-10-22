@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.Remoting.Messaging;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
@@ -23,8 +24,7 @@ namespace VocabularyTrainerWinForms
 
         private void ControlMain_Load(object sender, EventArgs e)
         {
-            wordListBindingSource.DataSource = WordList.GetLists();
-            ListBoxWordLists.ClearSelected();
+            LoadLists();
         }
 
         private void ListBoxWordLists_DoubleClick(object sender, EventArgs e)
@@ -60,14 +60,14 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonNew_Click(object sender, EventArgs e)
         {
-            var listForm = new NewListForm();
+            var listForm = new NewListForm(this);
             listForm.Show();
-            
         }
 
-        private void ControlMain_Enter(object sender, EventArgs e)
+        public void LoadLists()
         {
             wordListBindingSource.DataSource = WordList.GetLists();
+            ListBoxWordLists.ClearSelected();
         }
     }
 }

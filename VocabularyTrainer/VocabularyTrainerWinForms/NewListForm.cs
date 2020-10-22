@@ -6,8 +6,10 @@ namespace VocabularyTrainerWinForms
 {
     public partial class NewListForm : Form
     {
-        public NewListForm()
+        private ControlMain main;
+        public NewListForm(ControlMain main)
         {
+            this.main = main;
             InitializeComponent();
         }
 
@@ -15,7 +17,7 @@ namespace VocabularyTrainerWinForms
         {
             Close();
         }
-
+        
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(TextBoxName.Text) && !string.IsNullOrEmpty(TextBoxLanguages.Text))
@@ -25,13 +27,18 @@ namespace VocabularyTrainerWinForms
 
                 var newList = new WordList(listName, languages);
                 newList.Save();
-                
+                DialogResult = DialogResult.OK;
                 Close();
             }
             else
             {
                 MessageBox.Show("List name and languages is required to save.");
             }
+        }
+
+        private void NewListForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            main.LoadLists();
         }
     }
 }
