@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
@@ -16,7 +9,6 @@ namespace VocabularyTrainerWinForms
         public event EventHandler DataGridButtons;
 
         private MainForm mainform;
-        private WordList wordlist { get; set; }
         public ControlDataGrid(MainForm form)
         {
             InitializeComponent();
@@ -29,7 +21,7 @@ namespace VocabularyTrainerWinForms
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             DataGridButtons?.Invoke(this, null);
-
+            mainform.controlMain.LabelListAndWordCount();
         }
 
 
@@ -40,10 +32,9 @@ namespace VocabularyTrainerWinForms
             DataGrid.Columns.Clear();
             DataGrid.Refresh();
 
-            if (this.Visible == true)
+            if (Visible == true)
             {
                 var wordList = WordList.LoadList(mainform.controlMain.SelectedList);
-                wordlist = wordList;
 
                 foreach (var language in wordList.Languages)
                 {
@@ -59,17 +50,37 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            DataGrid.Rows.Add();
+            
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in DataGrid.SelectedRows)
+            var wordlist = WordList.LoadList(mainform.controlMain.SelectedList);
+            foreach (DataGridViewRow item in DataGrid.SelectedRows) //Remove the row in the datagrid
             {
                 DataGrid.Rows.RemoveAt(item.Index);
             }
 
-            var rowCollection = DataGrid.Rows;
+            var newWordList = new WordList(wordlist.Name, wordlist.Languages);
+
+            for (int i = 0; i < DataGrid.Rows.Count; i++) //Save the new words and write to the list.
+            {
+                var words = new string[wordlist.Languages.Length];
+                if (DataGrid.Rows.Count != 0)
+                {
+                    for (int j = 0; j < words.Length; j++)
+                    {
+                        words[j] = DataGrid.Rows[i].Cells[j].Value.ToString();
+                    }
+
+                    newWordList.Add(words);
+                    newWordList.Save();
+                }
+            }
+            if (DataGrid.Rows.Count == 0)
+            {
+                newWordList.Save();
+            }
         }
     }
 }

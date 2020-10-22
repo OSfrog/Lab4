@@ -52,7 +52,7 @@
             this.ListBoxWordLists.FormattingEnabled = true;
             this.ListBoxWordLists.ItemHeight = 24;
             this.ListBoxWordLists.Location = new System.Drawing.Point(4, 41);
-            this.ListBoxWordLists.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ListBoxWordLists.Margin = new System.Windows.Forms.Padding(4);
             this.ListBoxWordLists.Name = "ListBoxWordLists";
             this.ListBoxWordLists.Size = new System.Drawing.Size(391, 309);
             this.ListBoxWordLists.TabIndex = 1;
@@ -73,7 +73,7 @@
             this.ListBoxLanguages.FormattingEnabled = true;
             this.ListBoxLanguages.ItemHeight = 24;
             this.ListBoxLanguages.Location = new System.Drawing.Point(403, 41);
-            this.ListBoxLanguages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ListBoxLanguages.Margin = new System.Windows.Forms.Padding(4);
             this.ListBoxLanguages.Name = "ListBoxLanguages";
             this.ListBoxLanguages.Size = new System.Drawing.Size(392, 309);
             this.ListBoxLanguages.TabIndex = 2;
@@ -108,10 +108,10 @@
             this.ButtonSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonSelect.AutoSize = true;
             this.ButtonSelect.ForeColor = System.Drawing.Color.Black;
-            this.ButtonSelect.Location = new System.Drawing.Point(654, 358);
-            this.ButtonSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonSelect.Location = new System.Drawing.Point(718, 358);
+            this.ButtonSelect.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonSelect.Name = "ButtonSelect";
-            this.ButtonSelect.Size = new System.Drawing.Size(141, 42);
+            this.ButtonSelect.Size = new System.Drawing.Size(77, 35);
             this.ButtonSelect.TabIndex = 5;
             this.ButtonSelect.Text = "Select";
             this.ButtonSelect.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             // 
             this.ButtonNew.ForeColor = System.Drawing.Color.Black;
             this.ButtonNew.Location = new System.Drawing.Point(4, 358);
-            this.ButtonNew.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ButtonNew.Margin = new System.Windows.Forms.Padding(4);
             this.ButtonNew.Name = "ButtonNew";
             this.ButtonNew.Size = new System.Drawing.Size(86, 37);
             this.ButtonNew.TabIndex = 6;
@@ -143,7 +143,7 @@
             this.TableLayout.Controls.Add(this.ButtonNew, 0, 2);
             this.TableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableLayout.Location = new System.Drawing.Point(0, 0);
-            this.TableLayout.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TableLayout.Margin = new System.Windows.Forms.Padding(6);
             this.TableLayout.Name = "TableLayout";
             this.TableLayout.RowCount = 3;
             this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
@@ -160,7 +160,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
             this.Controls.Add(this.TableLayout);
             this.ForeColor = System.Drawing.Color.Coral;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ControlMain";
             this.Size = new System.Drawing.Size(799, 404);
             this.Load += new System.EventHandler(this.ControlMain_Load);

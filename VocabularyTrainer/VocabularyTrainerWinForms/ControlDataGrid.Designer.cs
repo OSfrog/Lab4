@@ -64,8 +64,8 @@
             this.TableLayoutPanel.SetColumnSpan(this.DataGrid, 3);
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EnableHeadersVisualStyles = false;
-            this.DataGrid.Location = new System.Drawing.Point(2, 2);
-            this.DataGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DataGrid.Location = new System.Drawing.Point(4, 4);
+            this.DataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DataGrid.MultiSelect = false;
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ReadOnly = true;
@@ -81,7 +81,7 @@
             this.DataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DataGrid.RowTemplate.Height = 31;
             this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGrid.Size = new System.Drawing.Size(432, 232);
+            this.DataGrid.Size = new System.Drawing.Size(791, 428);
             this.DataGrid.TabIndex = 0;
             // 
             // wordListBindingSource
@@ -107,17 +107,17 @@
             this.TableLayoutPanel.RowCount = 2;
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.19409F));
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.805907F));
-            this.TableLayoutPanel.Size = new System.Drawing.Size(436, 257);
+            this.TableLayoutPanel.Size = new System.Drawing.Size(799, 474);
             this.TableLayoutPanel.TabIndex = 1;
             // 
             // ButtonAdd
             // 
             this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.ButtonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonAdd.Location = new System.Drawing.Point(192, 236);
+            this.ButtonAdd.Location = new System.Drawing.Point(352, 436);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonAdd.Name = "ButtonAdd";
-            this.ButtonAdd.Size = new System.Drawing.Size(51, 21);
+            this.ButtonAdd.Size = new System.Drawing.Size(94, 38);
             this.ButtonAdd.TabIndex = 3;
             this.ButtonAdd.Text = "Add";
             this.ButtonAdd.UseVisualStyleBackColor = true;
@@ -127,10 +127,10 @@
             // 
             this.ButtonBack.AutoSize = true;
             this.ButtonBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.857143F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonBack.Location = new System.Drawing.Point(0, 236);
+            this.ButtonBack.Location = new System.Drawing.Point(0, 436);
             this.ButtonBack.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonBack.Name = "ButtonBack";
-            this.ButtonBack.Size = new System.Drawing.Size(51, 21);
+            this.ButtonBack.Size = new System.Drawing.Size(94, 38);
             this.ButtonBack.TabIndex = 1;
             this.ButtonBack.Text = "←";
             this.ButtonBack.UseVisualStyleBackColor = true;
@@ -141,10 +141,10 @@
             this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.ButtonRemove.AutoSize = true;
             this.ButtonRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonRemove.Location = new System.Drawing.Point(334, 236);
+            this.ButtonRemove.Location = new System.Drawing.Point(579, 436);
             this.ButtonRemove.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonRemove.Name = "ButtonRemove";
-            this.ButtonRemove.Size = new System.Drawing.Size(57, 21);
+            this.ButtonRemove.Size = new System.Drawing.Size(172, 38);
             this.ButtonRemove.TabIndex = 2;
             this.ButtonRemove.Text = "Remove";
             this.ButtonRemove.UseVisualStyleBackColor = true;
@@ -152,13 +152,13 @@
             // 
             // ControlDataGrid
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TableLayoutPanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ControlDataGrid";
-            this.Size = new System.Drawing.Size(436, 257);
+            this.Size = new System.Drawing.Size(799, 474);
             this.VisibleChanged += new System.EventHandler(this.ControlDataGrid_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).EndInit();

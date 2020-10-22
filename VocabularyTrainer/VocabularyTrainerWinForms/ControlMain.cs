@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
@@ -16,9 +13,9 @@ namespace VocabularyTrainerWinForms
             Dock = DockStyle.Fill;
         }
 
-        public string SelectedList 
+        public string SelectedList
         {
-            get { return ListBoxWordLists.SelectedItem?.ToString(); } 
+            get { return ListBoxWordLists.SelectedItem?.ToString(); }
         }
 
 
@@ -38,7 +35,7 @@ namespace VocabularyTrainerWinForms
 
             if (ListBoxWordLists.SelectedItem != null)
             {
-                var list = WordList.LoadList(ListBoxWordLists.SelectedItem.ToString());
+                var list = WordList.LoadList(SelectedList);
 
                 foreach (var language in list.Languages)
                 {
@@ -46,11 +43,15 @@ namespace VocabularyTrainerWinForms
                 }
 
                 ButtonSelect.Enabled = true;
+
+                LabelListAndWordCount();
+                
             }
             else
             {
                 ButtonSelect.Enabled = false;
             }
+
         }
 
         private void ButtonSelect_Click(object sender, EventArgs e)
@@ -68,6 +69,12 @@ namespace VocabularyTrainerWinForms
         {
             wordListBindingSource.DataSource = WordList.GetLists();
             ListBoxWordLists.ClearSelected();
+        }
+
+        public void LabelListAndWordCount()
+        {
+            LabelLists.Text = $"Lists                            " +
+                    $"Words: {WordList.LoadList(SelectedList).Count()}";
         }
     }
 }
