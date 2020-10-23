@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
+using System.Drawing;
 
 namespace VocabularyTrainerWinForms
 {
@@ -9,6 +10,7 @@ namespace VocabularyTrainerWinForms
         public event EventHandler DataGridButtons;
 
         private MainForm mainform;
+        public WordList SelectedList { get; set; }
         public ControlDataGrid(MainForm form)
         {
             InitializeComponent();
@@ -34,14 +36,14 @@ namespace VocabularyTrainerWinForms
 
             if (Visible == true)
             {
-                var wordList = WordList.LoadList(mainform.controlMain.SelectedList);
+                SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
 
-                foreach (var language in wordList.Languages)
+                foreach (var language in SelectedList.Languages)
                 {
                     DataGrid.Columns.Add("C1", language.ToUpper());
                 }
 
-                wordList.List(x =>
+                SelectedList.List(x =>
                 {
                     DataGrid.Rows.Add(x);
                 });
@@ -50,7 +52,8 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
-            
+            var addWordsForm = new AddWordsForm(this);
+            addWordsForm.ShowDialog(this);
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)

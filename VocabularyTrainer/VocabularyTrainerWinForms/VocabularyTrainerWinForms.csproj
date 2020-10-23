@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddWordsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddWordsForm.Designer.cs">
+      <DependentUpon>AddWordsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +78,9 @@
     <Compile Include="ControlDataGrid.Designer.cs">
       <DependentUpon>ControlDataGrid.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddWordsForm.resx">
+      <DependentUpon>AddWordsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ControlMain.resx">
       <DependentUpon>ControlMain.cs</DependentUpon>
     </EmbeddedResource>
