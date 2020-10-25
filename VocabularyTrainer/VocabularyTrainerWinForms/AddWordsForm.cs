@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using VocabularyTrainerLibrary;
+using System.Linq;
+using System.Drawing;
 
 namespace VocabularyTrainerWinForms
 {
@@ -28,15 +22,35 @@ namespace VocabularyTrainerWinForms
         private void AddWordsForm_Load(object sender, EventArgs e)
         {
             var wordlist = parent.SelectedList;
+            ButtonAdd.Enabled = false;
 
-            foreach (var language in wordlist.Languages)
-            {
-                DataGrid.Columns.Add("C1", "");
-            }
+            DataGrid.Columns.Add("Languages", "");
+            DataGrid.Columns.Add("Words", "");
 
             foreach (var language in wordlist.Languages)
             {
                 DataGrid.Rows.Add(language);
+            }
+
+            var rowHeight = DataGrid.ColumnHeadersHeight + DataGrid.Rows.Cast<DataGridViewRow>().Sum(r => r.Height); //Scales the form after the datagrid.
+            Panel.Size = new Size(Panel.Size.Width, Panel.Size.Height - (Panel.Size.Height - rowHeight + 20));
+            ClientSize = new Size(ClientSize.Width, Height - (ClientSize.Height - rowHeight + 20));
+        }
+
+        private void DataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e) //Check if any cell doesn't have a value to disable/enable add button.
+        {
+            for (int i = 0; i < (DataGrid.Rows.Count); i++)
+            {
+                if (DataGrid.Rows[i].Cells["Words"].Value != null &&
+                    DataGrid.Rows[i].Cells["Words"].Value != string.Empty)
+                {
+                    ButtonAdd.Enabled = true;
+                }
+                else
+                {
+                    ButtonAdd.Enabled = false;
+                    break;
+                }
             }
         }
     }

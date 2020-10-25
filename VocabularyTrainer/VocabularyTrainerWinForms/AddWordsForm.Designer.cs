@@ -28,25 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGrid = new System.Windows.Forms.DataGridView();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonAdd = new System.Windows.Forms.Button();
+            this.Panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
+            this.Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataGrid
             // 
             this.DataGrid.AllowUserToAddRows = false;
             this.DataGrid.AllowUserToDeleteRows = false;
+            this.DataGrid.AllowUserToResizeColumns = false;
+            this.DataGrid.AllowUserToResizeRows = false;
+            this.DataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGrid.Location = new System.Drawing.Point(-1, 0);
+            this.DataGrid.ColumnHeadersVisible = false;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGrid.DefaultCellStyle = dataGridViewCellStyle8;
+            this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataGrid.Location = new System.Drawing.Point(0, 0);
+            this.DataGrid.MultiSelect = false;
             this.DataGrid.Name = "DataGrid";
-            this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect;
-            this.DataGrid.Size = new System.Drawing.Size(248, 173);
+            this.DataGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            this.DataGrid.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DataGrid.ShowRowErrors = false;
+            this.DataGrid.Size = new System.Drawing.Size(203, 173);
             this.DataGrid.TabIndex = 0;
+            this.DataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGrid_CellValueChanged);
             // 
             // ButtonCancel
             // 
+            this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonCancel.ForeColor = System.Drawing.Color.Black;
             this.ButtonCancel.Location = new System.Drawing.Point(12, 187);
             this.ButtonCancel.Name = "ButtonCancel";
@@ -58,31 +92,46 @@
             // 
             // ButtonAdd
             // 
+            this.ButtonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonAdd.ForeColor = System.Drawing.Color.Black;
-            this.ButtonAdd.Location = new System.Drawing.Point(159, 187);
+            this.ButtonAdd.Location = new System.Drawing.Point(113, 187);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(75, 23);
             this.ButtonAdd.TabIndex = 2;
             this.ButtonAdd.Text = "Add";
             this.ButtonAdd.UseVisualStyleBackColor = true;
             // 
+            // Panel
+            // 
+            this.Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Panel.Controls.Add(this.DataGrid);
+            this.Panel.Location = new System.Drawing.Point(0, 0);
+            this.Panel.Margin = new System.Windows.Forms.Padding(0);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(203, 173);
+            this.Panel.TabIndex = 3;
+            // 
             // AddWordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(246, 222);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(201, 222);
+            this.Controls.Add(this.Panel);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.ButtonCancel);
-            this.Controls.Add(this.DataGrid);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AddWordsForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add word";
             this.Load += new System.EventHandler(this.AddWordsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
+            this.Panel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -92,5 +141,6 @@
         private System.Windows.Forms.DataGridView DataGrid;
         private System.Windows.Forms.Button ButtonCancel;
         private System.Windows.Forms.Button ButtonAdd;
+        private System.Windows.Forms.Panel Panel;
     }
 }
