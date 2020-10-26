@@ -8,7 +8,7 @@ namespace VocabularyTrainerConsole
     {
         static void Main(string[] args)
         {
-            
+
             if (args.Length != 0)
             {
                 var lowerArgs = ToLowerArguments(args);
@@ -92,7 +92,7 @@ namespace VocabularyTrainerConsole
 
                 AddWords(wordList);
 
-                Console.WriteLine($"-created list '{wordList.Name}' and added {wordList.Count()} words");
+                Console.WriteLine($"-created list '{wordList.Name}' and added {wordList.Count()} words\n");
             }
             else
             {
@@ -219,7 +219,7 @@ namespace VocabularyTrainerConsole
                         Console.WriteLine();
                     });
                     Console.WriteLine();
-                } 
+                }
                 else
                 {
                     Console.WriteLine(WordList.LoadList(args[1]) != null ? $"\n-list '{args[1]}' is empty\n"
@@ -243,8 +243,8 @@ namespace VocabularyTrainerConsole
                 {
                     var words = wordList.Count();
 
-                    Console.WriteLine(words == 1 ? $"\n-there is {words} word in list '{wordList.Name}'\n" 
-                        : words > 1 ?  $"\n-there are {words} words in list '{wordList.Name}'\n" 
+                    Console.WriteLine(words == 1 ? $"\n-there is {words} word in list '{wordList.Name}'\n"
+                        : words > 1 ? $"\n-there are {words} words in list '{wordList.Name}'\n"
                        : $"\n-list '{args[1]}' is empty\n");
                 }
                 else
@@ -263,47 +263,60 @@ namespace VocabularyTrainerConsole
             var correctWordsCounter = 0f;
             var wordCounter = 0f;
             var wordList = WordList.LoadList(args[1]);
-            Console.WriteLine("\n-press Enter (empty line) to stop practicing\n");
-
-            while (true)
+            if (wordList != null)
             {
-                var word = wordList.GetWordToPractice();
+                if (wordList.Count() != 0)
+                {
+                    Console.WriteLine("\n-press Enter (empty line) to stop practicing\n");
+                    while (true)
+                    {
+                        var word = wordList.GetWordToPractice();
 
-                Console.Write($"-translate the {wordList.Languages[word.FromLanguage]} word " +
-                    $"{word.Translations[word.FromLanguage]} to {wordList.Languages[word.ToLanguage]}: ");
-                var input = Console.ReadLine();
-                if (input == "")
-                {
-                    break;
-                }
-                else if (input == word.Translations[word.ToLanguage])
-                {
-                    Console.WriteLine("-correct answer");
-                    correctWordsCounter++;
-                    wordCounter++;
+                        Console.Write($"-translate the {wordList.Languages[word.FromLanguage]} word " +
+                            $"{word.Translations[word.FromLanguage]} to {wordList.Languages[word.ToLanguage]}: ");
+                        var input = Console.ReadLine();
+                        if (input == "")
+                        {
+                            break;
+                        }
+                        else if (input == word.Translations[word.ToLanguage])
+                        {
+                            Console.WriteLine("-correct answer");
+                            correctWordsCounter++;
+                            wordCounter++;
+                        }
+                        else
+                        {
+                            wordCounter++;
+                            Console.Write($"-wrong answer, the correct translation was '{word.Translations[word.ToLanguage]}'" +
+                                $"      (press enter to stop or any other key to continue)");
+                            var keyInput = Console.ReadKey().Key;
+
+                            if (keyInput == ConsoleKey.Enter)
+                            {
+                                ClearCurrentConsoleLine();
+                                Console.WriteLine();
+                                break;
+                            }
+
+                            ClearCurrentConsoleLine();
+                            Console.WriteLine("-wrong answer");
+                        }
+                    }
+
+                    Console.WriteLine($"-{wordCounter} words were practiced on");
+                    Console.WriteLine(correctWordsCounter != 0 ? $"-{correctWordsCounter / wordCounter:0%} of answers were correct"
+                        : $"-no answers were correct");
                 }
                 else
                 {
-                    wordCounter++;
-                    Console.Write($"-wrong answer, the correct translation was '{word.Translations[word.ToLanguage]}'" +
-                        $"      (press enter to stop or any other key to continue)");
-                    var keyInput = Console.ReadKey().Key;
-
-                    if (keyInput == ConsoleKey.Enter)
-                    {
-                        ClearCurrentConsoleLine();
-                        Console.WriteLine();
-                        break;
-                    }
-
-                    ClearCurrentConsoleLine();
-                    Console.WriteLine("-wrong answer");
+                    Console.WriteLine("\n-selected list is empty, use -add to populate list first\n");
                 }
             }
-
-            Console.WriteLine($"-{wordCounter} words were practiced on");
-            Console.WriteLine(correctWordsCounter != 0 ? $"-{correctWordsCounter / wordCounter:0%} of answers were correct"
-                : $"-no answers were correct");
+            else
+            {
+                Console.WriteLine("\n-list does not exist\n");
+            }
         }
         static void PrintInfo()
         {

@@ -82,7 +82,8 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonPractice_Click(object sender, EventArgs e)
         {
-            if (ListBoxWordLists.SelectedItem != null)
+            if (ListBoxWordLists.SelectedItem != null &&
+                WordList.LoadList(SelectedList).Count() != 0)
             {
                 practiceHandler?.Invoke(this, null);
             }

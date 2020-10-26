@@ -37,27 +37,30 @@
             // 
             // textBox
             // 
-            this.textBox.Location = new System.Drawing.Point(357, 277);
+            this.textBox.Location = new System.Drawing.Point(164, 167);
+            this.textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(312, 29);
+            this.textBox.Size = new System.Drawing.Size(172, 20);
             this.textBox.TabIndex = 0;
             this.textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // LabelTranslations
             // 
             this.LabelTranslations.AutoSize = true;
-            this.LabelTranslations.Location = new System.Drawing.Point(370, 184);
+            this.LabelTranslations.Location = new System.Drawing.Point(150, 134);
+            this.LabelTranslations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelTranslations.Name = "LabelTranslations";
-            this.LabelTranslations.Size = new System.Drawing.Size(119, 25);
+            this.LabelTranslations.Size = new System.Drawing.Size(64, 13);
             this.LabelTranslations.TabIndex = 1;
             this.LabelTranslations.Text = "Translations";
             // 
             // LabelWordCounter
             // 
             this.LabelWordCounter.AutoSize = true;
-            this.LabelWordCounter.Location = new System.Drawing.Point(465, 394);
+            this.LabelWordCounter.Location = new System.Drawing.Point(192, 202);
+            this.LabelWordCounter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelWordCounter.Name = "LabelWordCounter";
-            this.LabelWordCounter.Size = new System.Drawing.Size(64, 25);
+            this.LabelWordCounter.Size = new System.Drawing.Size(35, 13);
             this.LabelWordCounter.TabIndex = 2;
             this.LabelWordCounter.Text = "label1";
             this.LabelWordCounter.Visible = false;
@@ -65,19 +68,22 @@
             // ButtonRestart
             // 
             this.ButtonRestart.AutoSize = true;
-            this.ButtonRestart.Location = new System.Drawing.Point(313, 465);
+            this.ButtonRestart.Location = new System.Drawing.Point(164, 234);
+            this.ButtonRestart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonRestart.Name = "ButtonRestart";
-            this.ButtonRestart.Size = new System.Drawing.Size(138, 35);
+            this.ButtonRestart.Size = new System.Drawing.Size(75, 23);
             this.ButtonRestart.TabIndex = 3;
             this.ButtonRestart.Text = "Restart";
             this.ButtonRestart.UseVisualStyleBackColor = true;
+            this.ButtonRestart.Click += new System.EventHandler(this.ButtonRestart_Click);
             // 
             // ButtonEndPractice
             // 
             this.ButtonEndPractice.AutoSize = true;
-            this.ButtonEndPractice.Location = new System.Drawing.Point(563, 465);
+            this.ButtonEndPractice.Location = new System.Drawing.Point(258, 234);
+            this.ButtonEndPractice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ButtonEndPractice.Name = "ButtonEndPractice";
-            this.ButtonEndPractice.Size = new System.Drawing.Size(132, 35);
+            this.ButtonEndPractice.Size = new System.Drawing.Size(78, 23);
             this.ButtonEndPractice.TabIndex = 4;
             this.ButtonEndPractice.Text = "End Practice";
             this.ButtonEndPractice.UseVisualStyleBackColor = true;
@@ -85,7 +91,7 @@
             // 
             // ControlPractice
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DimGray;
             this.Controls.Add(this.ButtonEndPractice);
@@ -95,8 +101,9 @@
             this.Controls.Add(this.textBox);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ControlPractice";
-            this.Size = new System.Drawing.Size(918, 691);
+            this.Size = new System.Drawing.Size(501, 374);
             this.Load += new System.EventHandler(this.ControlPractice_Load);
+            this.VisibleChanged += new System.EventHandler(this.ControlPractice_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
