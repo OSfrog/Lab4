@@ -58,6 +58,12 @@
     <Compile Include="ControlMain.Designer.cs">
       <DependentUpon>ControlMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlPractice.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlPractice.Designer.cs">
+      <DependentUpon>ControlPractice.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ControlMain.resx">
       <DependentUpon>ControlMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlPractice.resx">
+      <DependentUpon>ControlPractice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

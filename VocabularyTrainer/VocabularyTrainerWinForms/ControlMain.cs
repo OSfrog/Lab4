@@ -6,7 +6,8 @@ namespace VocabularyTrainerWinForms
 {
     public partial class ControlMain : UserControl
     {
-        public event EventHandler MainButtons;
+        public event EventHandler buttonHandler;
+        public event EventHandler practiceHandler;
         public ControlMain()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace VocabularyTrainerWinForms
         {
             if (ListBoxWordLists.SelectedItem != null)
             {
-                MainButtons?.Invoke(this, null);
+                buttonHandler?.Invoke(this, null);
             }
         }
 
@@ -58,7 +59,7 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonSelect_Click(object sender, EventArgs e)
         {
-            MainButtons?.Invoke(this, null);
+            buttonHandler?.Invoke(this, null);
         }
 
         private void ButtonNew_Click(object sender, EventArgs e)
@@ -81,7 +82,10 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonPractice_Click(object sender, EventArgs e)
         {
-
+            if (ListBoxWordLists.SelectedItem != null)
+            {
+                practiceHandler?.Invoke(this, null);
+            }
         }
     }
 }

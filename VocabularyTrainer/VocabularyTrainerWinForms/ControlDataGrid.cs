@@ -6,7 +6,7 @@ namespace VocabularyTrainerWinForms
 {
     public partial class ControlDataGrid : UserControl
     {
-        public event EventHandler DataGridButtons;
+        public event EventHandler buttonHandler;
 
         private MainForm mainform;
         public WordList SelectedList { get; set; }
@@ -21,7 +21,7 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonBack_Click(object sender, EventArgs e)
         {
-            DataGridButtons?.Invoke(this, null);
+            buttonHandler?.Invoke(this, null);
         }
 
 
