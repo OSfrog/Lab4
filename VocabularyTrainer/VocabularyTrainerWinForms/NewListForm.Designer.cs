@@ -39,7 +39,7 @@
             // TextBoxName
             // 
             this.TextBoxName.Location = new System.Drawing.Point(174, 57);
-            this.TextBoxName.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TextBoxName.Margin = new System.Windows.Forms.Padding(6);
             this.TextBoxName.Name = "TextBoxName";
             this.TextBoxName.Size = new System.Drawing.Size(180, 29);
             this.TextBoxName.TabIndex = 0;
@@ -47,7 +47,7 @@
             // TextBoxLanguages
             // 
             this.TextBoxLanguages.Location = new System.Drawing.Point(174, 201);
-            this.TextBoxLanguages.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TextBoxLanguages.Margin = new System.Windows.Forms.Padding(6);
             this.TextBoxLanguages.Multiline = true;
             this.TextBoxLanguages.Name = "TextBoxLanguages";
             this.TextBoxLanguages.Size = new System.Drawing.Size(180, 130);
@@ -78,9 +78,8 @@
             // ButtonSave
             // 
             this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.ButtonSave.Location = new System.Drawing.Point(363, 375);
-            this.ButtonSave.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ButtonSave.Margin = new System.Windows.Forms.Padding(6);
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(138, 42);
             this.ButtonSave.TabIndex = 4;
@@ -92,7 +91,7 @@
             // 
             this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonCancel.Location = new System.Drawing.Point(22, 375);
-            this.ButtonCancel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ButtonCancel.Margin = new System.Windows.Forms.Padding(6);
             this.ButtonCancel.Name = "ButtonCancel";
             this.ButtonCancel.Size = new System.Drawing.Size(138, 42);
             this.ButtonCancel.TabIndex = 5;
@@ -113,11 +112,11 @@
             this.Controls.Add(this.TextBoxLanguages);
             this.Controls.Add(this.TextBoxName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NewListForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "NewListForm";
+            this.Text = "New List";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewListForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

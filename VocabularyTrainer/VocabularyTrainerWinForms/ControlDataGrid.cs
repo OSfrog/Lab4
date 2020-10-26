@@ -22,31 +22,13 @@ namespace VocabularyTrainerWinForms
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             DataGridButtons?.Invoke(this, null);
-            mainform.controlMain.LabelListAndWordCount();
         }
 
 
 
         private void ControlDataGrid_VisibleChanged(object sender, EventArgs e)
         {
-            DataGrid.Rows.Clear();
-            DataGrid.Columns.Clear();
-            DataGrid.Refresh();
-
-            if (Visible == true)
-            {
-                SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
-
-                foreach (var language in SelectedList.Languages)
-                {
-                    DataGrid.Columns.Add("C1", language.ToUpper());
-                }
-
-                SelectedList.List(x =>
-                {
-                    DataGrid.Rows.Add(x);
-                });
-            }
+            RefreshList();
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
@@ -82,6 +64,28 @@ namespace VocabularyTrainerWinForms
             if (DataGrid.Rows.Count == 0)
             {
                 newWordList.Save();
+            }
+        }
+
+        public void RefreshList()
+        {
+            DataGrid.Rows.Clear();
+            DataGrid.Columns.Clear();
+            DataGrid.Refresh();
+
+            if (Visible == true && mainform.controlMain.SelectedList != null)
+            {
+                SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
+
+                foreach (var language in SelectedList.Languages)
+                {
+                    DataGrid.Columns.Add("C1", language.ToUpper());
+                }
+
+                SelectedList.List(x =>
+                {
+                    DataGrid.Rows.Add(x);
+                });
             }
         }
     }

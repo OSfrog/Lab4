@@ -31,5 +31,16 @@ namespace VocabularyTrainerWinForms
             controlMain.Visible = false;
             dataGrid.Visible = true;
         }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var newListForm = new NewListForm(controlMain);
+            newListForm.ShowDialog();
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            controlMain.LoadLists();
+        }
     }
 }

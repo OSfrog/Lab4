@@ -14,10 +14,6 @@ namespace VocabularyTrainerWinForms
             this.parent = parent;
         }
 
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
 
         private void AddWordsForm_Load(object sender, EventArgs e)
         {
@@ -52,6 +48,23 @@ namespace VocabularyTrainerWinForms
                     break;
                 }
             }
+        }
+
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            var wordArray = new string[parent.SelectedList.Languages.Length];
+            for (int i = 0; i < (DataGrid.Rows.Count); i++)
+            {
+                wordArray[i] = DataGrid.Rows[i].Cells["Words"].Value.ToString();
+            }
+            parent.SelectedList.Add(wordArray);
+            parent.SelectedList.Save();
+            parent.RefreshList();
+            Close();
+        }
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

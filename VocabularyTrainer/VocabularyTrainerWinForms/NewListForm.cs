@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
+using System.Linq;
 
 namespace VocabularyTrainerWinForms
 {
@@ -20,19 +21,26 @@ namespace VocabularyTrainerWinForms
         
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TextBoxName.Text) && !string.IsNullOrEmpty(TextBoxLanguages.Text))
+            if (!string.IsNullOrWhiteSpace(TextBoxName.Text))
             {
                 var listName = TextBoxName.Text;
-                var languages = TextBoxLanguages.Lines;
-
+                var languages = TextBoxLanguages.Lines.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+                
+                if (languages.Length >= 2)
+                {
                 var newList = new WordList(listName, languages);
                 newList.Save();
-                DialogResult = DialogResult.OK;
                 Close();
+                }
+                else
+                {
+                    MessageBox.Show("Minimum of 2 languages are required to save.");
+                }
             }
             else
             {
-                MessageBox.Show("List name and languages is required to save.");
+                MessageBox.Show("List name and languages are required to save.");
+                            
             }
         }
 

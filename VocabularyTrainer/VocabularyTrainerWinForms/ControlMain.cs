@@ -26,17 +26,20 @@ namespace VocabularyTrainerWinForms
 
         private void ListBoxWordLists_DoubleClick(object sender, EventArgs e)
         {
-            MainButtons?.Invoke(this, null);
+            if (ListBoxWordLists.SelectedItem != null)
+            {
+                MainButtons?.Invoke(this, null);
+            }
         }
 
         private void ListBoxWordLists_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListBoxLanguages.Items.Clear();
 
-            if (ListBoxWordLists.SelectedItem != null)
+            if (ListBoxWordLists.SelectedItem != null &&
+                 !string.IsNullOrWhiteSpace(ListBoxWordLists.SelectedItem.ToString()))
             {
                 var list = WordList.LoadList(SelectedList);
-
                 foreach (var language in list.Languages)
                 {
                     ListBoxLanguages.Items.Add(language);
@@ -45,7 +48,6 @@ namespace VocabularyTrainerWinForms
                 ButtonSelect.Enabled = true;
 
                 LabelListAndWordCount();
-                
             }
             else
             {
@@ -62,7 +64,7 @@ namespace VocabularyTrainerWinForms
         private void ButtonNew_Click(object sender, EventArgs e)
         {
             var listForm = new NewListForm(this);
-            listForm.Show();
+            listForm.ShowDialog();
         }
 
         public void LoadLists()
