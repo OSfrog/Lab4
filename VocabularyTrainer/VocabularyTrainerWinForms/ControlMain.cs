@@ -78,5 +78,10 @@ namespace VocabularyTrainerWinForms
             LabelLists.Text = $"Lists                            " +
                     $"Words: {WordList.LoadList(SelectedList).Count()}";
         }
+
+        private void ButtonPractice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -65,7 +65,7 @@
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EnableHeadersVisualStyles = false;
             this.DataGrid.Location = new System.Drawing.Point(4, 4);
-            this.DataGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataGrid.Margin = new System.Windows.Forms.Padding(4);
             this.DataGrid.MultiSelect = false;
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ReadOnly = true;
@@ -138,13 +138,14 @@
             // 
             // ButtonRemove
             // 
-            this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.ButtonRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonRemove.AutoSize = true;
             this.ButtonRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonRemove.Location = new System.Drawing.Point(579, 436);
+            this.ButtonRemove.Location = new System.Drawing.Point(705, 436);
             this.ButtonRemove.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonRemove.Name = "ButtonRemove";
-            this.ButtonRemove.Size = new System.Drawing.Size(172, 38);
+            this.ButtonRemove.Size = new System.Drawing.Size(94, 38);
             this.ButtonRemove.TabIndex = 2;
             this.ButtonRemove.Text = "Remove";
             this.ButtonRemove.UseVisualStyleBackColor = true;
@@ -156,7 +157,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.TableLayoutPanel);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ControlDataGrid";
             this.Size = new System.Drawing.Size(799, 474);
             this.VisibleChanged += new System.EventHandler(this.ControlDataGrid_VisibleChanged);
