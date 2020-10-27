@@ -90,8 +90,10 @@ namespace VocabularyTrainerWinForms
 
         public void LabelListAndWordCount()
         {
-            LabelLists.Text = $"Lists                            " +
-                    $"Words: {WordList.LoadList(SelectedList).Count()}";
+            var text = WordList.LoadList(SelectedList) != null ? $"Lists                            " +
+                    $"Words: {WordList.LoadList(SelectedList).Count()}" : "Lists";
+            
+            LabelLists.Text = text;
         }
     }
 }

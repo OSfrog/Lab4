@@ -58,6 +58,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel.Location = new System.Drawing.Point(0, 20);
             this.Panel.Margin = new System.Windows.Forms.Padding(0);
+            this.Panel.MinimumSize = new System.Drawing.Size(501, 374);
             this.Panel.Name = "Panel";
             this.Panel.Size = new System.Drawing.Size(501, 374);
             this.Panel.TabIndex = 1;
@@ -112,6 +113,7 @@
             this.Controls.Add(this.MenuStrip);
             this.Controls.Add(this.Panel);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(517, 431);
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -54,21 +54,20 @@
             this.ListBoxLanguages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListBoxLanguages.ForeColor = System.Drawing.Color.White;
             this.ListBoxLanguages.FormattingEnabled = true;
-            this.ListBoxLanguages.ItemHeight = 24;
-            this.ListBoxLanguages.Location = new System.Drawing.Point(393, 41);
+            this.ListBoxLanguages.Location = new System.Drawing.Point(212, 20);
             this.ListBoxLanguages.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxLanguages.Name = "ListBoxLanguages";
-            this.ListBoxLanguages.Size = new System.Drawing.Size(402, 309);
+            this.ListBoxLanguages.Size = new System.Drawing.Size(224, 172);
             this.ListBoxLanguages.TabIndex = 2;
             this.ListBoxLanguages.TabStop = false;
             // 
             // ButtonNew
             // 
             this.ButtonNew.ForeColor = System.Drawing.Color.Black;
-            this.ButtonNew.Location = new System.Drawing.Point(0, 354);
+            this.ButtonNew.Location = new System.Drawing.Point(0, 192);
             this.ButtonNew.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonNew.Name = "ButtonNew";
-            this.ButtonNew.Size = new System.Drawing.Size(86, 42);
+            this.ButtonNew.Size = new System.Drawing.Size(56, 27);
             this.ButtonNew.TabIndex = 6;
             this.ButtonNew.Text = "New";
             this.ButtonNew.UseVisualStyleBackColor = true;
@@ -78,10 +77,10 @@
             // 
             this.ButtonSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonSelect.ForeColor = System.Drawing.Color.Black;
-            this.ButtonSelect.Location = new System.Drawing.Point(713, 354);
+            this.ButtonSelect.Location = new System.Drawing.Point(380, 192);
             this.ButtonSelect.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonSelect.Name = "ButtonSelect";
-            this.ButtonSelect.Size = new System.Drawing.Size(86, 42);
+            this.ButtonSelect.Size = new System.Drawing.Size(56, 27);
             this.ButtonSelect.TabIndex = 5;
             this.ButtonSelect.Text = "Select";
             this.ButtonSelect.UseVisualStyleBackColor = true;
@@ -92,10 +91,10 @@
             this.LabelLists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelLists.AutoSize = true;
             this.LabelLists.ForeColor = System.Drawing.Color.White;
-            this.LabelLists.Location = new System.Drawing.Point(4, 12);
-            this.LabelLists.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LabelLists.Location = new System.Drawing.Point(2, 7);
+            this.LabelLists.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelLists.Name = "LabelLists";
-            this.LabelLists.Size = new System.Drawing.Size(52, 25);
+            this.LabelLists.Size = new System.Drawing.Size(28, 13);
             this.LabelLists.TabIndex = 3;
             this.LabelLists.Text = "Lists";
             // 
@@ -104,10 +103,10 @@
             this.LabelLanguages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelLanguages.AutoSize = true;
             this.LabelLanguages.ForeColor = System.Drawing.Color.White;
-            this.LabelLanguages.Location = new System.Drawing.Point(393, 12);
-            this.LabelLanguages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LabelLanguages.Location = new System.Drawing.Point(214, 7);
+            this.LabelLanguages.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelLanguages.Name = "LabelLanguages";
-            this.LabelLanguages.Size = new System.Drawing.Size(110, 25);
+            this.LabelLanguages.Size = new System.Drawing.Size(60, 13);
             this.LabelLanguages.TabIndex = 4;
             this.LabelLanguages.Text = "Languages";
             // 
@@ -120,11 +119,10 @@
             this.ListBoxWordLists.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListBoxWordLists.ForeColor = System.Drawing.Color.White;
             this.ListBoxWordLists.FormattingEnabled = true;
-            this.ListBoxWordLists.ItemHeight = 24;
-            this.ListBoxWordLists.Location = new System.Drawing.Point(4, 41);
+            this.ListBoxWordLists.Location = new System.Drawing.Point(0, 20);
             this.ListBoxWordLists.Margin = new System.Windows.Forms.Padding(0);
             this.ListBoxWordLists.Name = "ListBoxWordLists";
-            this.ListBoxWordLists.Size = new System.Drawing.Size(381, 309);
+            this.ListBoxWordLists.Size = new System.Drawing.Size(212, 172);
             this.ListBoxWordLists.TabIndex = 1;
             this.ListBoxWordLists.TabStop = false;
             this.ListBoxWordLists.SelectedIndexChanged += new System.EventHandler(this.ListBoxWordLists_SelectedIndexChanged);
@@ -136,7 +134,7 @@
             this.TableLayout.ColumnCount = 3;
             this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.73066F));
             this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.26934F));
-            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
             this.TableLayout.Controls.Add(this.ListBoxLanguages, 1, 1);
             this.TableLayout.Controls.Add(this.ListBoxWordLists, 0, 1);
             this.TableLayout.Controls.Add(this.LabelLanguages, 1, 0);
@@ -150,20 +148,20 @@
             this.TableLayout.Margin = new System.Windows.Forms.Padding(0);
             this.TableLayout.Name = "TableLayout";
             this.TableLayout.RowCount = 3;
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TableLayout.Size = new System.Drawing.Size(799, 404);
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.TableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 11F));
+            this.TableLayout.Size = new System.Drawing.Size(436, 219);
             this.TableLayout.TabIndex = 7;
             // 
             // ButtonPractice
             // 
             this.ButtonPractice.AutoSize = true;
-            this.ButtonPractice.Location = new System.Drawing.Point(392, 357);
+            this.ButtonPractice.Location = new System.Drawing.Point(212, 192);
             this.ButtonPractice.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonPractice.Name = "ButtonPractice";
-            this.ButtonPractice.Size = new System.Drawing.Size(86, 42);
+            this.ButtonPractice.Size = new System.Drawing.Size(56, 27);
             this.ButtonPractice.TabIndex = 7;
             this.ButtonPractice.Text = "Practice";
             this.ButtonPractice.UseVisualStyleBackColor = true;
@@ -171,15 +169,15 @@
             // 
             // ControlMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
             this.Controls.Add(this.TableLayout);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ControlMain";
-            this.Size = new System.Drawing.Size(799, 404);
+            this.Size = new System.Drawing.Size(436, 219);
             this.Load += new System.EventHandler(this.ControlMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).EndInit();
             this.TableLayout.ResumeLayout(false);

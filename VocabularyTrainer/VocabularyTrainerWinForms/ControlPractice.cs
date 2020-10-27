@@ -12,6 +12,7 @@ namespace VocabularyTrainerWinForms
         public ControlPractice(MainForm form)
         {
             InitializeComponent();
+            Dock = DockStyle.Fill;
             mainform = form;
         }
 
@@ -61,7 +62,7 @@ namespace VocabularyTrainerWinForms
                 {
                     textBox.Clear();
                     WordCounter++;
-                    MessageBox.Show($"The correct answer was {word.Translations[word.ToLanguage]}.", "Incorrect answer");
+                    MessageBox.Show($"The correct answer was '{word.Translations[word.ToLanguage]}'.", "Incorrect answer");
                 }
                 LabelWordCounter.Text = $"{CorrectCounter} of {WordCounter} words were correct.";
                 LabelWordCounter.Visible = true;

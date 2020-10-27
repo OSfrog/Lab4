@@ -37,8 +37,10 @@
             // 
             // textBox
             // 
+            this.textBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox.Location = new System.Drawing.Point(164, 167);
-            this.textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox.Margin = new System.Windows.Forms.Padding(2);
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(172, 20);
             this.textBox.TabIndex = 0;
@@ -46,6 +48,7 @@
             // 
             // LabelTranslations
             // 
+            this.LabelTranslations.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.LabelTranslations.AutoSize = true;
             this.LabelTranslations.Location = new System.Drawing.Point(150, 134);
             this.LabelTranslations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -56,6 +59,7 @@
             // 
             // LabelWordCounter
             // 
+            this.LabelWordCounter.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.LabelWordCounter.AutoSize = true;
             this.LabelWordCounter.Location = new System.Drawing.Point(192, 202);
             this.LabelWordCounter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -67,9 +71,10 @@
             // 
             // ButtonRestart
             // 
+            this.ButtonRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ButtonRestart.AutoSize = true;
             this.ButtonRestart.Location = new System.Drawing.Point(164, 234);
-            this.ButtonRestart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtonRestart.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonRestart.Name = "ButtonRestart";
             this.ButtonRestart.Size = new System.Drawing.Size(75, 23);
             this.ButtonRestart.TabIndex = 3;
@@ -79,9 +84,10 @@
             // 
             // ButtonEndPractice
             // 
+            this.ButtonEndPractice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonEndPractice.AutoSize = true;
             this.ButtonEndPractice.Location = new System.Drawing.Point(258, 234);
-            this.ButtonEndPractice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ButtonEndPractice.Margin = new System.Windows.Forms.Padding(2);
             this.ButtonEndPractice.Name = "ButtonEndPractice";
             this.ButtonEndPractice.Size = new System.Drawing.Size(78, 23);
             this.ButtonEndPractice.TabIndex = 4;
@@ -100,6 +106,7 @@
             this.Controls.Add(this.LabelTranslations);
             this.Controls.Add(this.textBox);
             this.Margin = new System.Windows.Forms.Padding(0);
+            this.MinimumSize = new System.Drawing.Size(501, 374);
             this.Name = "ControlPractice";
             this.Size = new System.Drawing.Size(501, 374);
             this.Load += new System.EventHandler(this.ControlPractice_Load);
