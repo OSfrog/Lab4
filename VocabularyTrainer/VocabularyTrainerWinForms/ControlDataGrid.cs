@@ -71,9 +71,8 @@ namespace VocabularyTrainerWinForms
         {
             DataGrid.Rows.Clear();
             DataGrid.Columns.Clear();
-            DataGrid.Refresh();
 
-            if (Visible == true && mainform.controlMain.SelectedList != null)
+            if (mainform.controlMain.SelectedList != null)
             {
                 SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
 

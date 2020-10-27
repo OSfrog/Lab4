@@ -74,7 +74,7 @@ namespace VocabularyTrainerWinForms
             ListBoxWordLists.ClearSelected();
         }
 
-        public void LabelListAndWordCount()
+        private void LabelListAndWordCount()
         {
             LabelLists.Text = $"Lists                            " +
                     $"Words: {WordList.LoadList(SelectedList).Count()}";
