@@ -32,11 +32,9 @@
             this.languagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.wordListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Panel = new System.Windows.Forms.Panel();
-            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.practiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).BeginInit();
             this.MenuStrip.SuspendLayout();
@@ -63,6 +61,21 @@
             this.Panel.Size = new System.Drawing.Size(501, 374);
             this.Panel.TabIndex = 1;
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // newToolStripMenuItem
+            // 
+            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
             // MenuStrip
             // 
             this.MenuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
@@ -75,35 +88,6 @@
             this.MenuStrip.TabIndex = 2;
             this.MenuStrip.Text = "MenuStrip";
             // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.selectToolStripMenuItem,
-            this.practiceToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.newToolStripMenuItem.Text = "New";
-            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
-            // 
-            // selectToolStripMenuItem
-            // 
-            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            this.selectToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.selectToolStripMenuItem.Text = "Select";
-            // 
-            // practiceToolStripMenuItem
-            // 
-            this.practiceToolStripMenuItem.Name = "practiceToolStripMenuItem";
-            this.practiceToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.practiceToolStripMenuItem.Text = "Practice";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,7 +96,7 @@
             this.ClientSize = new System.Drawing.Size(501, 392);
             this.Controls.Add(this.MenuStrip);
             this.Controls.Add(this.Panel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(517, 431);
             this.Name = "MainForm";
             this.ShowIcon = false;
@@ -132,11 +116,9 @@
         private System.Windows.Forms.BindingSource wordListBindingSource;
         private System.Windows.Forms.BindingSource languagesBindingSource;
         private System.Windows.Forms.Panel Panel;
-        private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem practiceToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip MenuStrip;
     }
 }
 
