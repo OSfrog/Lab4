@@ -22,6 +22,7 @@ namespace VocabularyTrainerWinForms
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             buttonHandler?.Invoke(this, null);
+            mainform.controlMain.LabelListAndWordCount();
         }
 
 
@@ -39,31 +40,19 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            var wordlist = WordList.LoadList(mainform.controlMain.SelectedList);
-            foreach (DataGridViewRow item in DataGrid.SelectedRows) //Remove the row in the datagrid
-            {
-                DataGrid.Rows.RemoveAt(item.Index);
-            }
+            SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
 
-            var newWordList = new WordList(wordlist.Name, wordlist.Languages);
-
-            for (int i = 0; i < DataGrid.Rows.Count; i++) //Save the new words and write to the list.
+            if (DataGrid.SelectedRows.Count != 0)
             {
-                var words = new string[wordlist.Languages.Length];
-                if (DataGrid.Rows.Count != 0)
+                var selectedRowItems = DataGrid.SelectedRows;
+                foreach (DataGridViewRow item in selectedRowItems) //Remove the row in the datagrid
                 {
-                    for (int j = 0; j < words.Length; j++)
-                    {
-                        words[j] = DataGrid.Rows[i].Cells[j].Value.ToString();
-                    }
-
-                    newWordList.Add(words);
-                    newWordList.Save();
+                    DataGrid.Rows.RemoveAt(item.Index);
                 }
-            }
-            if (DataGrid.Rows.Count == 0)
-            {
-                newWordList.Save();
+
+                var word = selectedRowItems[0].Cells[0].Value.ToString();
+                SelectedList.Remove(0, word);
+                SelectedList.Save();
             }
         }
 
@@ -72,9 +61,12 @@ namespace VocabularyTrainerWinForms
             DataGrid.Rows.Clear();
             DataGrid.Columns.Clear();
 
-            if (mainform.controlMain.SelectedList != null)
+            if (mainform.controlMain.SelectedList != null || SelectedList != null)
             {
-                SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
+                if (SelectedList == null || mainform.controlMain.SelectedList != null)
+                {
+                    SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
+                }
 
                 foreach (var language in SelectedList.Languages)
                 {

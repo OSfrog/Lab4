@@ -68,25 +68,30 @@ namespace VocabularyTrainerWinForms
             listForm.ShowDialog();
         }
 
+
+        private void ButtonPractice_Click(object sender, EventArgs e)
+        {
+            if (ListBoxWordLists.SelectedItem != null &&
+                WordList.LoadList(SelectedList).Count() != 0 &&
+                WordList.LoadList(SelectedList).Languages.Length > 1)
+            {
+                practiceHandler?.Invoke(this, null);
+            }
+            else
+            {
+                MessageBox.Show("List must contain words or at least 2 languages to practice.", "Error");
+            }
+        }
         public void LoadLists()
         {
             wordListBindingSource.DataSource = WordList.GetLists();
             ListBoxWordLists.ClearSelected();
         }
 
-        private void LabelListAndWordCount()
+        public void LabelListAndWordCount()
         {
             LabelLists.Text = $"Lists                            " +
                     $"Words: {WordList.LoadList(SelectedList).Count()}";
-        }
-
-        private void ButtonPractice_Click(object sender, EventArgs e)
-        {
-            if (ListBoxWordLists.SelectedItem != null &&
-                WordList.LoadList(SelectedList).Count() != 0)
-            {
-                practiceHandler?.Invoke(this, null);
-            }
         }
     }
 }
