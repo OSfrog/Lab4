@@ -38,50 +38,45 @@
             // 
             // TextBoxName
             // 
-            this.TextBoxName.Location = new System.Drawing.Point(174, 57);
-            this.TextBoxName.Margin = new System.Windows.Forms.Padding(6);
+            this.TextBoxName.Location = new System.Drawing.Point(95, 31);
             this.TextBoxName.Name = "TextBoxName";
-            this.TextBoxName.Size = new System.Drawing.Size(180, 29);
+            this.TextBoxName.Size = new System.Drawing.Size(100, 20);
             this.TextBoxName.TabIndex = 0;
             // 
             // TextBoxLanguages
             // 
-            this.TextBoxLanguages.Location = new System.Drawing.Point(174, 201);
-            this.TextBoxLanguages.Margin = new System.Windows.Forms.Padding(6);
+            this.TextBoxLanguages.Location = new System.Drawing.Point(95, 109);
             this.TextBoxLanguages.Multiline = true;
             this.TextBoxLanguages.Name = "TextBoxLanguages";
-            this.TextBoxLanguages.Size = new System.Drawing.Size(180, 130);
+            this.TextBoxLanguages.Size = new System.Drawing.Size(100, 72);
             this.TextBoxLanguages.TabIndex = 1;
             // 
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.ForeColor = System.Drawing.Color.White;
-            this.LabelName.Location = new System.Drawing.Point(235, 28);
-            this.LabelName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.LabelName.ForeColor = System.Drawing.Color.Black;
+            this.LabelName.Location = new System.Drawing.Point(128, 15);
             this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(64, 25);
+            this.LabelName.Size = new System.Drawing.Size(35, 13);
             this.LabelName.TabIndex = 2;
             this.LabelName.Text = "Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(207, 172);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(113, 93);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 25);
+            this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Languages";
             // 
             // ButtonSave
             // 
             this.ButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonSave.Location = new System.Drawing.Point(363, 375);
-            this.ButtonSave.Margin = new System.Windows.Forms.Padding(6);
+            this.ButtonSave.Location = new System.Drawing.Point(198, 203);
             this.ButtonSave.Name = "ButtonSave";
-            this.ButtonSave.Size = new System.Drawing.Size(138, 42);
+            this.ButtonSave.Size = new System.Drawing.Size(75, 23);
             this.ButtonSave.TabIndex = 4;
             this.ButtonSave.Text = "Save";
             this.ButtonSave.UseVisualStyleBackColor = true;
@@ -90,10 +85,9 @@
             // ButtonCancel
             // 
             this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonCancel.Location = new System.Drawing.Point(22, 375);
-            this.ButtonCancel.Margin = new System.Windows.Forms.Padding(6);
+            this.ButtonCancel.Location = new System.Drawing.Point(12, 203);
             this.ButtonCancel.Name = "ButtonCancel";
-            this.ButtonCancel.Size = new System.Drawing.Size(138, 42);
+            this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
             this.ButtonCancel.TabIndex = 5;
             this.ButtonCancel.Text = "Cancel";
             this.ButtonCancel.UseVisualStyleBackColor = true;
@@ -101,10 +95,10 @@
             // 
             // NewListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(523, 439);
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ClientSize = new System.Drawing.Size(285, 238);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.label2);
@@ -112,7 +106,6 @@
             this.Controls.Add(this.TextBoxLanguages);
             this.Controls.Add(this.TextBoxName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "NewListForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

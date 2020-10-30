@@ -23,3 +23,8 @@ där orden slumpas från en ordlista och inte behövs läggas till av användare
 Kunna välja ett tema som t.ex: mat, affärer, kläder, etc för att öva på de specifika teman.
 Lägga till random meningar där vissa ord är blanka där man ska fylla i själv.
 
+TODO:
+*Implementera Dark Mode
+*Fixa MenuStrip
+*Kolla Felhantering.
+

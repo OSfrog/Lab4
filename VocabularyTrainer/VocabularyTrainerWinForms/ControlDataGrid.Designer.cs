@@ -64,8 +64,8 @@
             this.TableLayoutPanel.SetColumnSpan(this.DataGrid, 3);
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EnableHeadersVisualStyles = false;
-            this.DataGrid.Location = new System.Drawing.Point(2, 2);
-            this.DataGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DataGrid.Location = new System.Drawing.Point(0, 0);
+            this.DataGrid.Margin = new System.Windows.Forms.Padding(0);
             this.DataGrid.MultiSelect = false;
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ReadOnly = true;
@@ -81,7 +81,7 @@
             this.DataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DataGrid.RowTemplate.Height = 31;
             this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGrid.Size = new System.Drawing.Size(497, 343);
+            this.DataGrid.Size = new System.Drawing.Size(501, 347);
             this.DataGrid.TabIndex = 0;
             // 
             // wordListBindingSource
@@ -90,6 +90,7 @@
             // 
             // TableLayoutPanel
             // 
+            this.TableLayoutPanel.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.TableLayoutPanel.ColumnCount = 3;
             this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -112,7 +113,7 @@
             // 
             this.ButtonAdd.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.ButtonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.142858F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonAdd.Location = new System.Drawing.Point(221, 347);
+            this.ButtonAdd.Location = new System.Drawing.Point(222, 347);
             this.ButtonAdd.Margin = new System.Windows.Forms.Padding(0);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(56, 27);

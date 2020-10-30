@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace VocabularyTrainerWinForms
@@ -24,6 +26,8 @@ namespace VocabularyTrainerWinForms
             Panel.Controls.Add(controlDataGrid);
             controlDataGrid.Visible = false;
             controlPractice.Visible = false;
+
+            
         }
 
         private void ControlMain_practiceButton(object sender, EventArgs e)
@@ -57,5 +61,18 @@ namespace VocabularyTrainerWinForms
         {
             controlMain.LoadLists();
         }
+
+        private void darkModeToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (darkModeToolStripMenuItem.Checked == true)
+            {
+                controlMain.DarkMode();
+            }
+            else
+            {
+                controlMain.ResetColors();
+            }
+        }
     }
+    
 }

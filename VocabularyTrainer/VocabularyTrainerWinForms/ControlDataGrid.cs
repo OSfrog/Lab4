@@ -50,8 +50,8 @@ namespace VocabularyTrainerWinForms
                     DataGrid.Rows.RemoveAt(item.Index);
                 }
 
-                var word = selectedRowItems[0].Cells[0].Value.ToString();
-                SelectedList.Remove(0, word);
+                var wordToRemove = selectedRowItems[0].Cells[0].Value.ToString();
+                SelectedList.Remove(0, wordToRemove);
                 SelectedList.Save();
             }
         }

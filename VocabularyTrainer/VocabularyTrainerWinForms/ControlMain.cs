@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
@@ -94,6 +96,22 @@ namespace VocabularyTrainerWinForms
                     $"Words: {WordList.LoadList(SelectedList).Count()}" : "Lists";
             
             LabelLists.Text = text;
+        }
+
+        public void DarkMode() //Sets theme to darker
+        {
+            ListBoxLanguages.BackColor = Color.FromArgb(28, 28, 30);
+            ListBoxLanguages.ForeColor = Color.White;
+            ListBoxWordLists.BackColor = Color.FromArgb(28, 28, 30);
+            ListBoxWordLists.ForeColor = Color.White;
+        }
+
+        public void ResetColors() //Resets the colors.
+        {
+            ListBoxLanguages.ResetBackColor();
+            ListBoxLanguages.ResetForeColor();
+            ListBoxWordLists.ResetForeColor();
+            ListBoxWordLists.ResetBackColor();
         }
     }
 }
