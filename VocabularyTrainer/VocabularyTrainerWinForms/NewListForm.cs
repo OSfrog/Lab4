@@ -2,17 +2,19 @@
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 using System.Linq;
+using System.Drawing;
 
 namespace VocabularyTrainerWinForms
 {
-    public partial class NewListForm : Form
+    public partial class NewListForm : Form, ITheme 
     {
-        private ControlMain main;
+        private ControlMain parentControl;
         public NewListForm(ControlMain main)
         {
-            this.main = main;
+            parentControl = main;
             InitializeComponent();
         }
+
 
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
@@ -46,7 +48,19 @@ namespace VocabularyTrainerWinForms
 
         private void NewListForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            main.LoadLists();
+            parentControl.LoadLists();
+        }
+        public void DarkMode()
+        {
+            BackColor = Color.FromArgb(28, 28, 30);
+
+            LabelLanguages.ForeColor = Color.White;
+            LabelName.ForeColor = Color.White;
+        }
+
+        public void ResetMode()
+        {
+            throw new NotImplementedException();
         }
     }
 }

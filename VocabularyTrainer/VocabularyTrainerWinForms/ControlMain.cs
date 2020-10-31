@@ -100,18 +100,30 @@ namespace VocabularyTrainerWinForms
 
         public void DarkMode() //Sets theme to darker
         {
-            ListBoxLanguages.BackColor = Color.FromArgb(28, 28, 30);
+            TableLayout.BackColor = Color.FromArgb(28, 28, 30);
+
+            ListBoxLanguages.BackColor = Color.FromArgb(44, 44, 46);
             ListBoxLanguages.ForeColor = Color.White;
-            ListBoxWordLists.BackColor = Color.FromArgb(28, 28, 30);
+
+            ListBoxWordLists.BackColor = Color.FromArgb(44, 44, 46);
             ListBoxWordLists.ForeColor = Color.White;
+
+            LabelLanguages.ForeColor = Color.White;
+            LabelLists.ForeColor = Color.White;
         }
 
         public void ResetColors() //Resets the colors.
         {
+            TableLayout.BackColor = Color.FromKnownColor(KnownColor.AppWorkspace);
+
             ListBoxLanguages.ResetBackColor();
             ListBoxLanguages.ResetForeColor();
+
             ListBoxWordLists.ResetForeColor();
             ListBoxWordLists.ResetBackColor();
+
+            LabelLanguages.ForeColor = Color.Black;
+            LabelLists.ForeColor = Color.Black;
         }
     }
 }

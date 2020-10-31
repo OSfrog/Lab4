@@ -67,6 +67,7 @@ namespace VocabularyTrainerWinForms
             if (darkModeToolStripMenuItem.Checked == true)
             {
                 controlMain.DarkMode();
+                
             }
             else
             {

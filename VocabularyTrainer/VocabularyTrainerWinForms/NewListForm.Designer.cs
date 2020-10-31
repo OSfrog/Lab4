@@ -31,7 +31,7 @@
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.TextBoxLanguages = new System.Windows.Forms.TextBox();
             this.LabelName = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LabelLanguages = new System.Windows.Forms.Label();
             this.ButtonSave = new System.Windows.Forms.Button();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -61,15 +61,15 @@
             this.LabelName.TabIndex = 2;
             this.LabelName.Text = "Name";
             // 
-            // label2
+            // LabelLanguages
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(113, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Languages";
+            this.LabelLanguages.AutoSize = true;
+            this.LabelLanguages.ForeColor = System.Drawing.Color.Black;
+            this.LabelLanguages.Location = new System.Drawing.Point(113, 93);
+            this.LabelLanguages.Name = "LabelLanguages";
+            this.LabelLanguages.Size = new System.Drawing.Size(60, 13);
+            this.LabelLanguages.TabIndex = 3;
+            this.LabelLanguages.Text = "Languages";
             // 
             // ButtonSave
             // 
@@ -101,11 +101,13 @@
             this.ClientSize = new System.Drawing.Size(285, 238);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.LabelLanguages);
             this.Controls.Add(this.LabelName);
             this.Controls.Add(this.TextBoxLanguages);
             this.Controls.Add(this.TextBoxName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(301, 277);
             this.Name = "NewListForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -121,7 +123,7 @@
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.TextBox TextBoxLanguages;
         private System.Windows.Forms.Label LabelName;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LabelLanguages;
         private System.Windows.Forms.Button ButtonSave;
         private System.Windows.Forms.Button ButtonCancel;
     }

@@ -40,19 +40,25 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
-
-            if (DataGrid.SelectedRows.Count != 0)
+            if (mainform.controlMain.SelectedList != null || SelectedList != null)
             {
-                var selectedRowItems = DataGrid.SelectedRows;
-                foreach (DataGridViewRow item in selectedRowItems) //Remove the row in the datagrid
+                if (SelectedList == null || mainform.controlMain.SelectedList != null)
                 {
-                    DataGrid.Rows.RemoveAt(item.Index);
+                    SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
                 }
 
-                var wordToRemove = selectedRowItems[0].Cells[0].Value.ToString();
-                SelectedList.Remove(0, wordToRemove);
-                SelectedList.Save();
+                if (DataGrid.SelectedRows.Count != 0)
+                {
+                    var selectedRowItems = DataGrid.SelectedRows;
+                    foreach (DataGridViewRow item in selectedRowItems) //Remove the row in the datagrid
+                    {
+                        DataGrid.Rows.RemoveAt(item.Index);
+                    }
+
+                    var wordToRemove = selectedRowItems[0].Cells[0].Value.ToString();
+                    SelectedList.Remove(0, wordToRemove);
+                    SelectedList.Save();
+                }
             }
         }
 

@@ -91,7 +91,6 @@
             // 
             this.darkModeToolStripMenuItem.CheckOnClick = true;
             this.darkModeToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.darkModeToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.darkModeToolStripMenuItem.Name = "darkModeToolStripMenuItem";
             this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.darkModeToolStripMenuItem.Text = "Dark Mode";
@@ -100,7 +99,6 @@
             // MenuStrip
             // 
             this.MenuStrip.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.MenuStrip.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
