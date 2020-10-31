@@ -11,8 +11,8 @@ namespace VocabularyTrainerWinForms
         private ControlMain parentControl;
         public NewListForm(ControlMain main)
         {
-            parentControl = main;
             InitializeComponent();
+            parentControl = main;
         }
 
 
@@ -50,7 +50,7 @@ namespace VocabularyTrainerWinForms
         {
             parentControl.LoadLists();
         }
-        public void DarkMode()
+        public void DarkModeOn()
         {
             BackColor = Color.FromArgb(28, 28, 30);
 
@@ -58,9 +58,12 @@ namespace VocabularyTrainerWinForms
             LabelName.ForeColor = Color.White;
         }
 
-        public void ResetMode()
+        public void DarkModeOff()
         {
-            throw new NotImplementedException();
+            BackColor = Color.FromKnownColor(KnownColor.AppWorkspace);
+
+            LabelLanguages.ForeColor = Color.Black;
+            LabelName.ForeColor = Color.Black;
         }
     }
 }

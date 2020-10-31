@@ -8,8 +8,8 @@ namespace VocabularyTrainerWinForms
 {
     interface ITheme
     {
-        void DarkMode();
+        void DarkModeOn();
 
-        void ResetMode();
+        void DarkModeOff();
     }
 }

@@ -6,19 +6,26 @@ using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerWinForms
 {
-    public partial class ControlMain : UserControl
+    public partial class ControlMain : UserControl, ITheme
     {
         public event EventHandler buttonHandler;
         public event EventHandler practiceHandler;
-        public ControlMain()
+        private MainForm parentForm;
+        public ControlMain(MainForm parentform)
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
+            parentForm = parentform;
         }
 
         public string SelectedList
         {
             get { return ListBoxWordLists.SelectedItem?.ToString(); }
+        }
+
+        public bool IsDarkModeEnabled 
+        { 
+            get { return parentForm.DarkMode; }
         }
 
 
@@ -67,6 +74,14 @@ namespace VocabularyTrainerWinForms
         private void ButtonNew_Click(object sender, EventArgs e)
         {
             var listForm = new NewListForm(this);
+            if (parentForm.DarkMode)
+            {
+                listForm.DarkModeOn();
+            }
+            else
+            {
+                listForm.DarkModeOff();
+            }
             listForm.ShowDialog();
         }
 
@@ -98,7 +113,7 @@ namespace VocabularyTrainerWinForms
             LabelLists.Text = text;
         }
 
-        public void DarkMode() //Sets theme to darker
+        public void DarkModeOn() //Sets theme to darker
         {
             TableLayout.BackColor = Color.FromArgb(28, 28, 30);
 
@@ -112,7 +127,7 @@ namespace VocabularyTrainerWinForms
             LabelLists.ForeColor = Color.White;
         }
 
-        public void ResetColors() //Resets the colors.
+        public void DarkModeOff() //Resets the colors.
         {
             TableLayout.BackColor = Color.FromKnownColor(KnownColor.AppWorkspace);
 

@@ -48,14 +48,7 @@ namespace VocabularyTrainerLibrary
                     wordList.Add(streamReader.ReadLine().Split(charSeparator, StringSplitOptions.RemoveEmptyEntries));
                 }
 
-                if (languageArray.Length != 0)
-                {
-                    return wordList;
-                }
-                else
-                {
-                    return null;
-                }
+                return languageArray.Length != 0 ? wordList : null;
             }
 
             return null;

@@ -1,34 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace VocabularyTrainerWinForms
 {
     public partial class MainForm : Form
     {
-        public ControlMain controlMain = new ControlMain();
+        public ControlMain controlMain;
         private ControlDataGrid controlDataGrid;
         private ControlPractice controlPractice;
         public MainForm()
         {
             InitializeComponent();
 
-            controlDataGrid  = new ControlDataGrid(this);
+            controlMain = new ControlMain(this);
+            controlDataGrid = new ControlDataGrid(this);
             controlPractice = new ControlPractice(this);
             controlMain.buttonHandler += ControlMain_DoubleClick;
             controlMain.practiceHandler += ControlMain_practiceButton;
             controlDataGrid.buttonHandler += DataGrid_ButtonBack;
-            
+
 
             Panel.Controls.Add(controlPractice);
             Panel.Controls.Add(controlMain);
             Panel.Controls.Add(controlDataGrid);
             controlDataGrid.Visible = false;
             controlPractice.Visible = false;
-
-            
         }
+
+        public bool DarkMode { get; set; }
 
         private void ControlMain_practiceButton(object sender, EventArgs e)
         {
@@ -54,7 +53,15 @@ namespace VocabularyTrainerWinForms
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var newListForm = new NewListForm(controlMain);
-            newListForm.ShowDialog();
+            if (DarkMode)
+            {
+                newListForm.DarkModeOn();
+            }
+            else
+            {
+                newListForm.DarkModeOff();
+            }
+                newListForm.ShowDialog();
         }
 
         private void MainForm_Activated(object sender, EventArgs e)
@@ -66,14 +73,16 @@ namespace VocabularyTrainerWinForms
         {
             if (darkModeToolStripMenuItem.Checked == true)
             {
-                controlMain.DarkMode();
+                DarkMode = true;
+                controlMain.DarkModeOn();
                 
             }
             else
             {
-                controlMain.ResetColors();
+                DarkMode = false;
+                controlMain.DarkModeOff();
             }
         }
     }
-    
+
 }
