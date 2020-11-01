@@ -27,10 +27,6 @@ namespace VocabularyTrainerWinForms
 
 
 
-        private void ControlDataGrid_VisibleChanged(object sender, EventArgs e)
-        {
-            RefreshList();
-        }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -60,6 +56,10 @@ namespace VocabularyTrainerWinForms
                     SelectedList.Save();
                 }
             }
+        }
+        private void ControlDataGrid_VisibleChanged(object sender, EventArgs e)
+        {
+            RefreshList();
         }
 
         public void RefreshList()

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerWinForms
 {
-    public partial class ControlPractice : UserControl
+    public partial class ControlPractice : UserControl, ITheme
     {
         private MainForm mainform;
         private WordList wordlist;
@@ -83,5 +84,18 @@ namespace VocabularyTrainerWinForms
                 $" to {languagearray[word.ToLanguage]}.";
         }
 
+        public void DarkModeOn()
+        {
+            BackColor = Color.FromArgb(28, 28, 30);
+            LabelTranslations.ForeColor = Color.White;
+            LabelWordCounter.ForeColor = Color.White;
+        }
+
+        public void DarkModeOff()
+        {
+            BackColor = Color.White;
+            LabelTranslations.ForeColor = Color.Black;
+            LabelWordCounter.ForeColor = Color.Black;
+        }
     }
 }
