@@ -92,7 +92,7 @@ namespace VocabularyTrainerWinForms
                 WordList.LoadList(SelectedList).Count() != 0 &&
                 WordList.LoadList(SelectedList).Languages.Length > 1)
             {
-                practiceHandler?.Invoke(this, null);
+                practiceHandler?.Invoke(this, null); //Switches control to practice control.
             }
             else
             {
@@ -113,7 +113,7 @@ namespace VocabularyTrainerWinForms
             LabelLists.Text = text;
         }
 
-        public void DarkModeOn() //Sets theme to darker
+        public void DarkModeOn() //Sets theme to darker colors.
         {
             TableLayout.BackColor = Color.FromArgb(28, 28, 30);
 

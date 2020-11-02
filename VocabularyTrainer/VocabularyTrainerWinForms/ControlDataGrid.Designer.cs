@@ -83,6 +83,7 @@
             this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGrid.Size = new System.Drawing.Size(501, 347);
             this.DataGrid.TabIndex = 0;
+            this.DataGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DataGrid_RowsRemoved);
             // 
             // wordListBindingSource
             // 

@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerWinForms
 {
-    public partial class ControlDataGrid : UserControl
+    public partial class ControlDataGrid : UserControl, ITheme
     {
         public event EventHandler buttonHandler;
 
-        private MainForm mainform;
+        private MainForm parentform;
         public WordList SelectedList { get; set; }
         public ControlDataGrid(MainForm form)
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
-            mainform = form;
+            parentform = form;
 
         }
 
@@ -22,25 +23,30 @@ namespace VocabularyTrainerWinForms
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             buttonHandler?.Invoke(this, null);
-            mainform.controlMain.LabelListAndWordCount();
+            parentform.controlMain.LabelListAndWordCount();
         }
-
-
-
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             var addWordsForm = new AddWordsForm(this);
+            if (parentform.DarkMode)
+            {
+                addWordsForm.DarkModeOn();
+            }
+            else
+            {
+                addWordsForm.DarkModeOff();
+            }
             addWordsForm.ShowDialog(this);
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            if (mainform.controlMain.SelectedList != null || SelectedList != null)
+            if (parentform.controlMain.SelectedList != null || SelectedList != null)
             {
-                if (SelectedList == null || mainform.controlMain.SelectedList != null)
+                if (SelectedList == null || parentform.controlMain.SelectedList != null)
                 {
-                    SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
+                    SelectedList = WordList.LoadList(parentform.controlMain.SelectedList);
                 }
 
                 if (DataGrid.SelectedRows.Count != 0)
@@ -60,6 +66,26 @@ namespace VocabularyTrainerWinForms
         private void ControlDataGrid_VisibleChanged(object sender, EventArgs e)
         {
             RefreshList();
+
+            if (DataGrid.Rows.Count != 0)
+            {
+                ButtonRemove.Enabled = true;
+            }
+            else
+            {
+                ButtonRemove.Enabled = false;
+            }
+        }
+        private void DataGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (DataGrid.Rows.Count != 0)
+            {
+                ButtonRemove.Enabled = true;
+            }
+            else
+            {
+                ButtonRemove.Enabled = false;
+            }
         }
 
         public void RefreshList()
@@ -67,11 +93,12 @@ namespace VocabularyTrainerWinForms
             DataGrid.Rows.Clear();
             DataGrid.Columns.Clear();
 
-            if (mainform.controlMain.SelectedList != null || SelectedList != null)
+            //Saves the current list before the new form will make the SelectedList property null.
+            if (parentform.controlMain.SelectedList != null || SelectedList != null)
             {
-                if (SelectedList == null || mainform.controlMain.SelectedList != null)
+                if (SelectedList == null || parentform.controlMain.SelectedList != null) 
                 {
-                    SelectedList = WordList.LoadList(mainform.controlMain.SelectedList);
+                    SelectedList = WordList.LoadList(parentform.controlMain.SelectedList);
                 }
 
                 foreach (var language in SelectedList.Languages)
@@ -85,5 +112,26 @@ namespace VocabularyTrainerWinForms
                 });
             }
         }
+
+        public void DarkModeOn()
+        {
+            TableLayoutPanel.BackColor = Color.FromArgb(28, 28, 30);
+
+            DataGrid.BackgroundColor = Color.FromArgb(44, 44, 46);
+            DataGrid.GridColor = Color.White;
+            DataGrid.RowsDefaultCellStyle.BackColor = Color.FromArgb(44, 44, 46);
+            DataGrid.RowsDefaultCellStyle.ForeColor = Color.White;
+        }
+
+        public void DarkModeOff()
+        {
+            TableLayoutPanel.BackColor = Color.FromKnownColor(KnownColor.AppWorkspace);
+            
+            DataGrid.BackgroundColor = Color.White;
+            DataGrid.GridColor = Color.FromKnownColor(KnownColor.ControlDark);
+            DataGrid.RowsDefaultCellStyle.BackColor = Color.White;
+            DataGrid.RowsDefaultCellStyle.ForeColor = Color.Black;
+        }
+
     }
 }

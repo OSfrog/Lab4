@@ -23,7 +23,8 @@ namespace VocabularyTrainerWinForms
         
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TextBoxName.Text))
+            if (!string.IsNullOrWhiteSpace(TextBoxName.Text) &&
+                !HasSpecialChars(TextBoxName.Text))
             {
                 var listName = TextBoxName.Text;
                 var languages = TextBoxLanguages.Lines.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
@@ -39,16 +40,24 @@ namespace VocabularyTrainerWinForms
                     MessageBox.Show("Minimum of 2 languages are required to save.");
                 }
             }
+            else if (HasSpecialChars(TextBoxName.Text))
+            {
+                MessageBox.Show("List name cannot contain special characters.");
+            }
             else
             {
-                MessageBox.Show("List name and languages are required to save.");
-                            
+                MessageBox.Show("List name and languages are required to save.");            
             }
         }
 
         private void NewListForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             parentControl.LoadLists();
+        }
+
+        private bool HasSpecialChars(string input)
+        {
+            return input.Any(x => !char.IsLetterOrDigit(x));
         }
         public void DarkModeOn()
         {

@@ -76,13 +76,14 @@ namespace VocabularyTrainerWinForms
                 DarkMode = true;
                 controlMain.DarkModeOn();
                 controlPractice.DarkModeOn();
-                
+                controlDataGrid.DarkModeOn();
             }
             else
             {
                 DarkMode = false;
                 controlMain.DarkModeOff();
                 controlPractice.DarkModeOff();
+                controlDataGrid.DarkModeOff();
             }
         }
     }

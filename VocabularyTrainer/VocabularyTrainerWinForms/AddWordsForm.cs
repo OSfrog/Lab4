@@ -6,7 +6,7 @@ using VocabularyTrainerLibrary;
 
 namespace VocabularyTrainerWinForms
 {
-    public partial class AddWordsForm : Form
+    public partial class AddWordsForm : Form, ITheme
     {
         private ControlDataGrid parent;
         public AddWordsForm(ControlDataGrid parent)
@@ -38,15 +38,19 @@ namespace VocabularyTrainerWinForms
         {
             for (int i = 0; i < (DataGrid.Rows.Count); i++)
             {
-                if (DataGrid.Rows[i].Cells["Words"].Value != null &&
-                    DataGrid.Rows[i].Cells["Words"].Value != string.Empty)
-                {
-                    ButtonAdd.Enabled = true;
-                }
-                else
+                if (DataGrid.Rows[i].Cells["Words"].Value == null)
                 {
                     ButtonAdd.Enabled = false;
                     break;
+                }
+                else if (string.IsNullOrWhiteSpace(DataGrid.Rows[i].Cells["Words"].Value.ToString()))
+                {
+                    ButtonAdd.Enabled = false;
+                    break;
+                }
+                else
+                {
+                    ButtonAdd.Enabled = true;
                 }
             }
         }
@@ -66,6 +70,26 @@ namespace VocabularyTrainerWinForms
         private void ButtonCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public void DarkModeOn()
+        {
+            DataGrid.BackgroundColor = Color.FromArgb(44, 44, 46);
+            DataGrid.GridColor = Color.White;
+            DataGrid.RowsDefaultCellStyle.BackColor = Color.FromArgb(44, 44, 46);
+            DataGrid.RowsDefaultCellStyle.ForeColor = Color.White;
+
+            BackColor = Color.FromArgb(28, 28, 30);
+        }
+
+        public void DarkModeOff()
+        {
+            DataGrid.BackgroundColor = Color.White;
+            DataGrid.GridColor = Color.FromKnownColor(KnownColor.ControlDark);
+            DataGrid.RowsDefaultCellStyle.BackColor = Color.White;
+            DataGrid.RowsDefaultCellStyle.ForeColor = Color.Black;
+
+            BackColor = Color.White;
         }
     }
 }
