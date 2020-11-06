@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace VocabularyTrainerWinForms
@@ -8,6 +9,7 @@ namespace VocabularyTrainerWinForms
         public ControlMain controlMain;
         private ControlDataGrid controlDataGrid;
         private ControlPractice controlPractice;
+        private ToolStripDropDownMenu dropDownMenu;
         public MainForm()
         {
             InitializeComponent();
@@ -28,6 +30,11 @@ namespace VocabularyTrainerWinForms
         }
 
         public bool DarkMode { get; set; }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            dropDownMenu = (ToolStripDropDownMenu)fileToolStripMenuItem.DropDown;
+            dropDownMenu.ShowImageMargin = false;
+        }
 
         private void ControlMain_practiceButton(object sender, EventArgs e)
         {
@@ -77,6 +84,7 @@ namespace VocabularyTrainerWinForms
                 controlMain.DarkModeOn();
                 controlPractice.DarkModeOn();
                 controlDataGrid.DarkModeOn();
+                MenuStripDarkModeOn();
             }
             else
             {
@@ -84,7 +92,25 @@ namespace VocabularyTrainerWinForms
                 controlMain.DarkModeOff();
                 controlPractice.DarkModeOff();
                 controlDataGrid.DarkModeOff();
+                MenuStripDarkModeOff();
             }
+        }
+
+        private void MenuStripDarkModeOn()
+        {
+            MenuStrip.BackColor = Color.FromArgb(15, 15, 18);
+            MenuStrip.ForeColor = Color.White;
+
+            dropDownMenu.BackColor = Color.FromArgb(44, 44, 46);
+            dropDownMenu.ForeColor = Color.White;
+        }
+        private void MenuStripDarkModeOff()
+        {
+            MenuStrip.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
+            MenuStrip.ForeColor = Color.Black;
+
+            dropDownMenu.BackColor = Color.White;
+            dropDownMenu.ForeColor = Color.Black;
         }
     }
 

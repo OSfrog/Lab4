@@ -91,8 +91,8 @@
             this.LabelLists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelLists.AutoSize = true;
             this.LabelLists.ForeColor = System.Drawing.Color.Black;
-            this.LabelLists.Location = new System.Drawing.Point(2, 7);
-            this.LabelLists.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelLists.Location = new System.Drawing.Point(0, 7);
+            this.LabelLists.Margin = new System.Windows.Forms.Padding(0);
             this.LabelLists.Name = "LabelLists";
             this.LabelLists.Size = new System.Drawing.Size(28, 13);
             this.LabelLists.TabIndex = 3;
@@ -103,8 +103,8 @@
             this.LabelLanguages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelLanguages.AutoSize = true;
             this.LabelLanguages.ForeColor = System.Drawing.Color.Black;
-            this.LabelLanguages.Location = new System.Drawing.Point(213, 7);
-            this.LabelLanguages.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelLanguages.Location = new System.Drawing.Point(211, 7);
+            this.LabelLanguages.Margin = new System.Windows.Forms.Padding(0);
             this.LabelLanguages.Name = "LabelLanguages";
             this.LabelLanguages.Size = new System.Drawing.Size(60, 13);
             this.LabelLanguages.TabIndex = 4;
@@ -134,14 +134,14 @@
             this.TableLayout.ColumnCount = 3;
             this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.73066F));
             this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.26934F));
-            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.TableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.TableLayout.Controls.Add(this.ListBoxLanguages, 1, 1);
             this.TableLayout.Controls.Add(this.ListBoxWordLists, 0, 1);
             this.TableLayout.Controls.Add(this.LabelLanguages, 1, 0);
-            this.TableLayout.Controls.Add(this.LabelLists, 0, 0);
             this.TableLayout.Controls.Add(this.ButtonNew, 0, 2);
             this.TableLayout.Controls.Add(this.ButtonSelect, 2, 2);
             this.TableLayout.Controls.Add(this.ButtonPractice, 1, 2);
+            this.TableLayout.Controls.Add(this.LabelLists, 0, 0);
             this.TableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableLayout.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.TableLayout.Location = new System.Drawing.Point(0, 0);

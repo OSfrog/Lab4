@@ -42,50 +42,33 @@ namespace VocabularyTrainerWinForms
 
         private void ButtonRemove_Click(object sender, EventArgs e)
         {
-            if (parentform.controlMain.SelectedList != null || SelectedList != null)
+            NullCheck();
+
+            if (DataGrid.SelectedRows.Count != 0 && SelectedList != null)
             {
-                if (SelectedList == null || parentform.controlMain.SelectedList != null)
+                var selectedRowItems = DataGrid.SelectedRows;
+                foreach (DataGridViewRow item in selectedRowItems) //Remove the row in the datagrid
                 {
-                    SelectedList = WordList.LoadList(parentform.controlMain.SelectedList);
+                    DataGrid.Rows.RemoveAt(item.Index);
                 }
 
-                if (DataGrid.SelectedRows.Count != 0)
-                {
-                    var selectedRowItems = DataGrid.SelectedRows;
-                    foreach (DataGridViewRow item in selectedRowItems) //Remove the row in the datagrid
-                    {
-                        DataGrid.Rows.RemoveAt(item.Index);
-                    }
-
-                    var wordToRemove = selectedRowItems[0].Cells[0].Value.ToString();
-                    SelectedList.Remove(0, wordToRemove);
-                    SelectedList.Save();
-                }
+                var wordToRemove = selectedRowItems[0].Cells[0].Value.ToString();
+                SelectedList.Remove(0, wordToRemove);
+                SelectedList.Save();
             }
+
+            ButtonRemove.Enabled = DataGrid.Rows.Count != 0;
         }
+        private void DataGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            ButtonRemove.Enabled = DataGrid.Rows.Count != 0;
+        }
+
         private void ControlDataGrid_VisibleChanged(object sender, EventArgs e)
         {
             RefreshList();
 
-            if (DataGrid.Rows.Count != 0)
-            {
-                ButtonRemove.Enabled = true;
-            }
-            else
-            {
-                ButtonRemove.Enabled = false;
-            }
-        }
-        private void DataGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            if (DataGrid.Rows.Count != 0)
-            {
-                ButtonRemove.Enabled = true;
-            }
-            else
-            {
-                ButtonRemove.Enabled = false;
-            }
+            ButtonRemove.Enabled = DataGrid.Rows.Count != 0;
         }
 
         public void RefreshList()
@@ -93,14 +76,10 @@ namespace VocabularyTrainerWinForms
             DataGrid.Rows.Clear();
             DataGrid.Columns.Clear();
 
-            //Saves the current list before the new form will make the SelectedList property null.
-            if (parentform.controlMain.SelectedList != null || SelectedList != null)
-            {
-                if (SelectedList == null || parentform.controlMain.SelectedList != null) 
-                {
-                    SelectedList = WordList.LoadList(parentform.controlMain.SelectedList);
-                }
+            NullCheck();
 
+            if (SelectedList != null)
+            {
                 foreach (var language in SelectedList.Languages)
                 {
                     DataGrid.Columns.Add("C1", language.ToUpper());
@@ -126,11 +105,22 @@ namespace VocabularyTrainerWinForms
         public void DarkModeOff()
         {
             TableLayoutPanel.BackColor = Color.FromKnownColor(KnownColor.AppWorkspace);
-            
+
             DataGrid.BackgroundColor = Color.White;
             DataGrid.GridColor = Color.FromKnownColor(KnownColor.ControlDark);
             DataGrid.RowsDefaultCellStyle.BackColor = Color.White;
             DataGrid.RowsDefaultCellStyle.ForeColor = Color.Black;
+        }
+
+        private void NullCheck()  //Saves the current list before the new form will make the SelectedList property null.
+        {
+            if (parentform.controlMain.SelectedList != null || SelectedList != null)
+            {
+                if (SelectedList == null || parentform.controlMain.SelectedList != null)
+                {
+                    SelectedList = WordList.LoadList(parentform.controlMain.SelectedList);
+                }
+            }
         }
 
     }

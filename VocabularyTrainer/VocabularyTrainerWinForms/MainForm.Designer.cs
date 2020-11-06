@@ -76,7 +76,7 @@
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Text = "New File";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // themeToolStripMenuItem
@@ -123,6 +123,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Trainer v1.0";
             this.Activated += new System.EventHandler(this.MainForm_Activated);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.languagesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wordListBindingSource)).EndInit();
             this.MenuStrip.ResumeLayout(false);
