@@ -234,89 +234,87 @@ namespace VocabularyTrainerConsole
 
         static void Count(string[] args)
         {
-            if (args.Length == 2)
-            {
-                var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\VocabularyTrainer\\{args[1]}.dat";
-                var wordList = WordList.LoadList(args[1]);
-
-                if (wordList != null)
-                {
-                    var words = wordList.Count();
-
-                    Console.WriteLine(words == 1 ? $"\n-there is {words} word in list '{wordList.Name}'\n"
-                        : words > 1 ? $"\n-there are {words} words in list '{wordList.Name}'\n"
-                       : $"\n-list '{args[1]}' is empty\n");
-                }
-                else
-                {
-                    Console.WriteLine($"\n-list '{args[1]}' does not exist\n");
-                }
-            }
-            else
+            if (args.Length != 2)
             {
                 Console.WriteLine("\n-listname is needed for -count command\n");
+                return;
             }
+
+            var wordList = WordList.LoadList(args[1]);
+
+            if (wordList == null)
+            {
+                Console.WriteLine($"\n-list '{args[1]}' does not exist\n");
+                return;
+            }
+
+            var words = wordList.Count();
+
+            Console.WriteLine(words == 1 ? $"\n-there is {words} word in list '{wordList.Name}'\n"
+                : words > 1 ? $"\n-there are {words} words in list '{wordList.Name}'\n"
+               : $"\n-list '{args[1]}' is empty\n");
+
+
         }
 
         static void Practice(string[] args)
         {
+            var wordList = WordList.LoadList(args[1]);
+            if (wordList == null)
+            {
+                Console.WriteLine("\n-list does not exist\n");
+                return;
+            }
+
+            if (wordList.Count() == 0)
+            {
+                Console.WriteLine("\n-selected list is empty, use -add to populate list first\n");
+                return;
+            }
+
             var correctWordsCounter = 0f;
             var wordCounter = 0f;
-            var wordList = WordList.LoadList(args[1]);
-            if (wordList != null)
+            Console.WriteLine("\n-press Enter (empty line) to stop practicing\n");
+            while (true)
             {
-                if (wordList.Count() != 0)
+                var word = wordList.GetWordToPractice();
+
+                Console.Write($"-translate the {wordList.Languages[word.FromLanguage]} word " +
+                    $"{word.Translations[word.FromLanguage]} to {wordList.Languages[word.ToLanguage]}: ");
+
+                var input = Console.ReadLine();
+                if (input == "")
                 {
-                    Console.WriteLine("\n-press Enter (empty line) to stop practicing\n");
-                    while (true)
-                    {
-                        var word = wordList.GetWordToPractice();
-
-                        Console.Write($"-translate the {wordList.Languages[word.FromLanguage]} word " +
-                            $"{word.Translations[word.FromLanguage]} to {wordList.Languages[word.ToLanguage]}: ");
-                        var input = Console.ReadLine();
-                        if (input == "")
-                        {
-                            break;
-                        }
-                        else if (input == word.Translations[word.ToLanguage])
-                        {
-                            Console.WriteLine("-correct answer");
-                            correctWordsCounter++;
-                            wordCounter++;
-                        }
-                        else
-                        {
-                            wordCounter++;
-                            Console.Write($"-wrong answer, the correct translation was '{word.Translations[word.ToLanguage]}'" +
-                                $"      (press enter to stop or any other key to continue)");
-                            var keyInput = Console.ReadKey().Key;
-
-                            if (keyInput == ConsoleKey.Enter)
-                            {
-                                ClearCurrentConsoleLine();
-                                Console.WriteLine();
-                                break;
-                            }
-
-                            ClearCurrentConsoleLine();
-                            Console.WriteLine("-wrong answer");
-                        }
-                    }
-
-                    Console.WriteLine($"-{wordCounter} words were practiced on");
-                    Console.WriteLine(correctWordsCounter != 0 ? $"-{correctWordsCounter / wordCounter:0%} of answers were correct"
-                        : $"-no answers were correct");
+                    break;
+                }
+                else if (input == word.Translations[word.ToLanguage])
+                {
+                    Console.WriteLine("-correct answer");
+                    correctWordsCounter++;
+                    wordCounter++;
                 }
                 else
                 {
-                    Console.WriteLine("\n-selected list is empty, use -add to populate list first\n");
+                    wordCounter++;
+                    Console.Write($"-wrong answer, the correct translation was '{word.Translations[word.ToLanguage]}'" +
+                        $"      (press enter to stop or any other key to continue)");
+                    var keyInput = Console.ReadKey().Key;
+
+                    if (keyInput == ConsoleKey.Enter)
+                    {
+                        ClearCurrentConsoleLine();
+                        Console.WriteLine();
+                        break;
+                    }
+
+                    ClearCurrentConsoleLine();
+                    Console.WriteLine("-wrong answer");
                 }
             }
-            else
-            {
-                Console.WriteLine("\n-list does not exist\n");
-            }
+
+            Console.WriteLine($"-{wordCounter} words were practiced on");
+            Console.WriteLine(correctWordsCounter != 0 ? $"-{correctWordsCounter / wordCounter:0%} of answers were correct"
+                : $"-no answers were correct");
         }
         static void PrintInfo()
         {
